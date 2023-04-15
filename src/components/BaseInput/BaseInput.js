@@ -2,25 +2,36 @@ import React from "react";
 
 //TODO: Handle validation
 
-function BaseInput({ label, name, rules, type, register, ...delegated }) {
+function BaseInput({
+  label,
+  name,
+  rules,
+  type,
+  register,
+  error,
+  ...delegated
+}) {
   const id = React.useId();
   const errorId = `${id}-error`;
 
-  const requiredAttr = rules.required && {
+  const requiredAttr = rules.required.value && {
     "aria-required": true,
     "aria-invalid": true,
   };
 
   return (
     <div>
-      <label className="c-base-input__label" htmlFor={id}>
-        {label}
-      </label>
+      <div className="c-base-input__label-and-error">
+        <label className="c-base-input__label" htmlFor={id}>
+          {label}
+        </label>
+        <span className="c-base-input__error">{error}</span>
+      </div>
       <span className="c-base-input__error" id={errorId}></span>
       <input
         className="c-base-input__input"
         {...delegated}
-        {...register(name, { required: rules.required })}
+        {...register(name, { ...rules })}
         id={id}
         aria-describedby={errorId}
         type={type}

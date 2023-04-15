@@ -53,6 +53,7 @@ html {
   --color-accent-one: #483eff;
   --color-accent-two: #ffaf7e;
   --color-accent-three: #f9818e;
+  --color-error: #ee374a;
 
   --spacer-16: #{rem(16)};
   --spacer-48: #{rem(48)};
@@ -319,7 +320,7 @@ body {
 .c-form-step__btn {
   font-size: rem(16);
   line-height: calc(18 / 16);
-  padding: rem(14) rem(24);
+  padding: 0;
   border: 0;
   margin: 0;
   font-weight: var(--font-weight-medium);
@@ -334,14 +335,24 @@ body {
   color: var(--color-white);
   background-color: var(--color-primary);
   border-radius: rem(8);
+  padding: rem(14) rem(24);
 }
 
-.c-base-input__label {
-  display: block;
-  color: var(--color-primary);
+.c-base-input__label-and-error {
+  display: flex;
+  justify-content: space-between;
   font-size: rem(14);
   line-height: calc(16 / 14);
   margin-bottom: rem(8);
+}
+
+.c-base-input__label {
+  color: var(--color-primary);
+}
+
+.c-base-input__error {
+  color: var(--color-error);
+  font-weight: var(--font-weight-bold);
 }
 
 .c-base-input__input {

@@ -2,6 +2,7 @@ import React from "react";
 import "./App.scss";
 import Indicator from "../Indicator/Indicator";
 import FormStep from "../FormStep/FormStep";
+import { ErrorMessage } from "@hookform/error-message";
 import { useForm } from "react-hook-form";
 
 import BaseInput from "../BaseInput/BaseInput";
@@ -12,7 +13,18 @@ const firstStepForm = [
     name: "name",
     type: "text", // TypeScript would help here to allow just text | email | tel
     rules: {
-      required: true,
+      required: {
+        value: true,
+        message: "Name is required",
+      },
+      minLength: {
+        value: 12,
+        message: "It makes no sense, but minimum length is 12 characters",
+      },
+      valueAsNumber: {
+        value: true,
+        message: "This input is number only.",
+      },
     },
   },
   {
@@ -20,7 +32,10 @@ const firstStepForm = [
     name: "email",
     type: "email",
     rules: {
-      required: true,
+      required: {
+        value: true,
+        message: "Email address is required",
+      },
     },
   },
   {
@@ -28,7 +43,10 @@ const firstStepForm = [
     name: "phone",
     type: "tel",
     rules: {
-      required: true,
+      required: {
+        value: true,
+        message: "Phone number is required",
+      },
     },
   },
 ];
@@ -40,27 +58,21 @@ function App() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ criteriaMode: "all" });
   const [currentStep, setCurrentStep] = React.useState(1);
-
-  console.log(errors);
 
   function isCurrentStep(index) {
     return index === currentStep;
   }
 
-  const handleSubmitButton = React.useCallback(() => {
-    setCurrentStep((currentStep) => currentStep + 1);
-  }, []);
-
-  const handlePreviousClick = React.useCallback(() => {
-    setCurrentStep((currentStep) => currentStep - 1);
+  const handleStepChange = React.useCallback((stepChange) => {
+    setCurrentStep((currentStep) => currentStep + stepChange);
   }, []);
 
   return (
     <div className="c-app">
       <Indicator currentStep={currentStep} setCurrentStep={setCurrentStep} />
-      <ButtonClickContext.Provider value={handleSubmitButton}>
+      <ButtonClickContext.Provider value={handleStepChange}>
         <div className="c-form">
           {isCurrentStep(1) && (
             <FormStep
@@ -77,6 +89,18 @@ function App() {
                   rules={input.rules}
                   register={register}
                   key={input.name}
+                  error={
+                    <ErrorMessage
+                      errors={errors}
+                      name={input.name}
+                      render={({ messages }) =>
+                        messages &&
+                        Object.entries(messages).map(([type, message]) => (
+                          <p key={type}>{message}</p>
+                        ))
+                      }
+                    />
+                  }
                 />
               ))}
             </FormStep>
@@ -87,7 +111,7 @@ function App() {
               heading="Select your plan"
               description="You have the option of monthly or yearly billing."
               buttonLabel="Next step"
-              handlePreviousClick={handlePreviousClick}
+              allowGoStepBack={true}
             >
               here radio and checkbox
             </FormStep>
@@ -98,7 +122,7 @@ function App() {
               heading="Pick add-ons"
               description="Add-ons help enhance your gaming experience."
               buttonLabel="Next step"
-              handlePreviousClick={handlePreviousClick}
+              allowGoStepBack={true}
             >
               here checkboxes
             </FormStep>
@@ -109,7 +133,7 @@ function App() {
               heading="Finishing up"
               description="Double-check everything looks OK before confirming."
               buttonLabel="Confirm"
-              handlePreviousClick={handlePreviousClick}
+              allowGoStepBack={true}
             >
               here confirmation with option to go back
             </FormStep>
