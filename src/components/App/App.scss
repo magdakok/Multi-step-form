@@ -338,9 +338,13 @@ body {
   padding: rem(14) rem(24);
 }
 
-.c-base-input__label-and-error {
-  display: flex;
-  justify-content: space-between;
+.c-base-input__group {
+  margin-bottom: rem(24);
+}
+
+.c-base-input__label,
+.c-base-input__error {
+  display: block;
   font-size: rem(14);
   line-height: calc(16 / 14);
   margin-bottom: rem(8);
@@ -351,6 +355,7 @@ body {
 }
 
 .c-base-input__error {
+  text-align: left;
   color: var(--color-error);
   font-weight: var(--font-weight-bold);
 }
@@ -361,9 +366,17 @@ body {
   width: 100%;
   border: 1px solid var(--color-bg-border);
   padding: rem(12) rem(16);
-  color: var(--color-grey);
+  color: var(--color-primary);
   font-size: rem(16);
   line-height: calc(25 / 16);
   border-radius: rem(8);
-  margin-bottom: rem(24);
+  margin-bottom: rem(8);
+
+  &--error {
+    border-color: (var(--color-error));
+  }
+
+  ::placeholder {
+    color: var(--color-grey);
+  }
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { ErrorMessage } from "@hookform/error-message";
 
 //TODO: Handle validation
 
@@ -8,7 +9,7 @@ function BaseInput({
   rules,
   type,
   register,
-  error,
+  errors,
   ...delegated
 }) {
   const id = React.useId();
@@ -19,17 +20,28 @@ function BaseInput({
     "aria-invalid": true,
   };
 
+  const errorMessages = errors[name] && (
+    <ErrorMessage
+      errors={errors}
+      name={name}
+      render={({ messages }) =>
+        messages &&
+        Object.entries(messages).map(([type, message]) => (
+          <React.Fragment key={type}>{message}</React.Fragment>
+        ))
+      }
+    />
+  );
+
   return (
-    <div>
-      <div className="c-base-input__label-and-error">
-        <label className="c-base-input__label" htmlFor={id}>
-          {label}
-        </label>
-        <span className="c-base-input__error">{error}</span>
-      </div>
-      <span className="c-base-input__error" id={errorId}></span>
+    <div className="c-base-input__group">
+      <label className="c-base-input__label" htmlFor={id}>
+        {label}
+      </label>
       <input
-        className="c-base-input__input"
+        className={`c-base-input__input ${
+          errorMessages && "c-base-input__input--error"
+        }`}
         {...delegated}
         {...register(name, { ...rules })}
         id={id}
@@ -37,8 +49,11 @@ function BaseInput({
         type={type}
         {...requiredAttr}
       />
+      <p className="c-base-input__error" id={errorId} aria-live="polite">
+        {errorMessages}
+      </p>
     </div>
   );
 }
 
-export default React.memo(BaseInput);
+export default BaseInput;

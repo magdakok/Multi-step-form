@@ -2,7 +2,6 @@ import React from "react";
 import "./App.scss";
 import Indicator from "../Indicator/Indicator";
 import FormStep from "../FormStep/FormStep";
-import { ErrorMessage } from "@hookform/error-message";
 import { useForm } from "react-hook-form";
 
 import BaseInput from "../BaseInput/BaseInput";
@@ -12,18 +11,15 @@ const firstStepForm = [
     label: "Name",
     name: "name",
     type: "text", // TypeScript would help here to allow just text | email | tel
+    placeholder: "e.g. Arthur Conan Doyle",
     rules: {
       required: {
         value: true,
         message: "Name is required",
       },
       minLength: {
-        value: 12,
-        message: "It makes no sense, but minimum length is 12 characters",
-      },
-      valueAsNumber: {
-        value: true,
-        message: "This input is number only.",
+        value: 2,
+        message: "The minimum length is 2 characters",
       },
     },
   },
@@ -31,10 +27,15 @@ const firstStepForm = [
     label: "Email Address",
     name: "email",
     type: "email",
+    placeholder: "e.g. acdoyle@bakerstreet.com",
     rules: {
       required: {
         value: true,
         message: "Email address is required",
+      },
+      pattern: {
+        value: /\S+@\S+\.\S+/,
+        message: "Entered value does not match email format",
       },
     },
   },
@@ -42,10 +43,15 @@ const firstStepForm = [
     label: "Phone Number",
     name: "phone",
     type: "tel",
+    placeholder: "e.g. 07534 000 122",
     rules: {
       required: {
         value: true,
         message: "Phone number is required",
+      },
+      pattern: {
+        value: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
+        message: "Entered value does not match phone format",
       },
     },
   },
@@ -87,20 +93,10 @@ function App() {
                   name={input.name}
                   type={input.type}
                   rules={input.rules}
+                  placeholder={input.placeholder}
                   register={register}
                   key={input.name}
-                  error={
-                    <ErrorMessage
-                      errors={errors}
-                      name={input.name}
-                      render={({ messages }) =>
-                        messages &&
-                        Object.entries(messages).map(([type, message]) => (
-                          <p key={type}>{message}</p>
-                        ))
-                      }
-                    />
-                  }
+                  errors={errors}
                 />
               ))}
             </FormStep>
