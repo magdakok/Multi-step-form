@@ -1,24 +1,21 @@
 import React from "react";
 import { ErrorMessage } from "@hookform/error-message";
 
-//TODO: Handle validation
-
 function BaseInput({
+  index = 0,
   label,
   name,
   rules,
   type,
   register,
   errors,
+  value,
+  handleMultipleInputs,
   ...delegated
 }) {
+  console.log("BaseInput re-rendered");
   const id = React.useId();
   const errorId = `${id}-error`;
-
-  const requiredAttr = rules.required.value && {
-    "aria-required": true,
-    "aria-invalid": true,
-  };
 
   const errorMessages = errors[name] && (
     <ErrorMessage
@@ -40,14 +37,18 @@ function BaseInput({
       </label>
       <input
         className={`c-base-input__input ${
-          errorMessages && "c-base-input__input--error"
+          errorMessages ? "c-base-input__input--error" : ""
         }`}
         {...delegated}
-        {...register(name, { ...rules })}
+        {...register(name, {
+          ...rules,
+          onChange: (event) => handleMultipleInputs(event.target.value, index),
+        })}
         id={id}
         aria-describedby={errorId}
-        type={type}
-        {...requiredAttr}
+        value={value}
+        aria-invalid={errorMessages ? "true" : "false"}
+        aria-required={register ? "true" : "false"}
       />
       <p className="c-base-input__error" id={errorId} aria-live="polite">
         {errorMessages}

@@ -3,59 +3,20 @@ import "./App.scss";
 import Indicator from "../Indicator/Indicator";
 import FormStep from "../FormStep/FormStep";
 import { useForm } from "react-hook-form";
+import {
+  initialFirstStepState,
+  firstStepForm,
+  billingPlanRadios,
+  radioToggle,
+  addOnsCheckboxes,
+  initialAddOns,
+} from "../../data";
+import { getValueAndCurrency } from "../../helpers/helpers";
 
 import BaseInput from "../BaseInput/BaseInput";
-
-const firstStepForm = [
-  {
-    label: "Name",
-    name: "name",
-    type: "text", // TypeScript would help here to allow just text | email | tel
-    placeholder: "e.g. Arthur Conan Doyle",
-    rules: {
-      required: {
-        value: true,
-        message: "Name is required",
-      },
-      minLength: {
-        value: 2,
-        message: "The minimum length is 2 characters",
-      },
-    },
-  },
-  {
-    label: "Email Address",
-    name: "email",
-    type: "email",
-    placeholder: "e.g. acdoyle@bakerstreet.com",
-    rules: {
-      required: {
-        value: true,
-        message: "Email address is required",
-      },
-      pattern: {
-        value: /\S+@\S+\.\S+/,
-        message: "Entered value does not match email format",
-      },
-    },
-  },
-  {
-    label: "Phone Number",
-    name: "phone",
-    type: "tel",
-    placeholder: "e.g. 07534 000 122",
-    rules: {
-      required: {
-        value: true,
-        message: "Phone number is required",
-      },
-      pattern: {
-        value: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
-        message: "Entered value does not match phone format",
-      },
-    },
-  },
-];
+import BaseRadio from "../BaseRadio/BaseRadio";
+import BaseCheckboxGroup from "../BaseCheckboxGroup/BaseCheckboxGroup";
+import OrderSummary from "../OrderSummary/OrderSummary";
 
 export const ButtonClickContext = React.createContext();
 
@@ -66,14 +27,47 @@ function App() {
     formState: { errors },
   } = useForm({ criteriaMode: "all" });
   const [currentStep, setCurrentStep] = React.useState(1);
+  const [firstStepFormData, setFirstStepFormData] = React.useState(
+    initialFirstStepState
+  );
+  const [billingPlan, setBillingPlan] = React.useState(0);
+  const [regularity, setRegularity] = React.useState(0);
+  const [addOns, setAddOns] = React.useState(initialAddOns);
 
   function isCurrentStep(index) {
     return index === currentStep;
   }
 
+  const handleMultipleInputs = React.useCallback((value, index) => {
+    setFirstStepFormData((currentValue) => {
+      const nextValue = currentValue;
+      nextValue[index] = value;
+      return [...nextValue];
+    });
+  }, []);
+
   const handleStepChange = React.useCallback((stepChange) => {
     setCurrentStep((currentStep) => currentStep + stepChange);
   }, []);
+
+  const handleSetBillingPlan = React.useCallback((value) => {
+    setBillingPlan(value);
+  }, []);
+
+  const handleRegularity = React.useCallback((value) => {
+    setRegularity(value);
+  }, []);
+
+  const handleAddOns = React.useCallback(
+    (option) => {
+      const currentOptionValue = addOns[option];
+      setAddOns((currentAddOns) => ({
+        ...currentAddOns,
+        [option]: !currentOptionValue,
+      }));
+    },
+    [addOns]
+  );
 
   return (
     <div className="c-app">
@@ -87,16 +81,19 @@ function App() {
               description="Please provide your name, email address, and phone number."
               buttonLabel="Next step"
             >
-              {firstStepForm.map((input) => (
+              {firstStepForm.map((input, i) => (
                 <BaseInput
+                  index={i}
                   label={input.label}
                   name={input.name}
                   type={input.type}
                   rules={input.rules}
+                  value={firstStepFormData[i]}
                   placeholder={input.placeholder}
                   register={register}
                   key={input.name}
                   errors={errors}
+                  handleMultipleInputs={handleMultipleInputs}
                 />
               ))}
             </FormStep>
@@ -109,7 +106,23 @@ function App() {
               buttonLabel="Next step"
               allowGoStepBack={true}
             >
-              here radio and checkbox
+              <BaseRadio
+                legend={billingPlanRadios.legend}
+                name={billingPlanRadios.name}
+                radios={billingPlanRadios.radios}
+                billingPlanDescription={true}
+                checked={billingPlan}
+                regularity={regularity}
+                handleRadioClick={handleSetBillingPlan}
+              />
+              <BaseRadio
+                legend={radioToggle.legend}
+                name={radioToggle.name}
+                radios={radioToggle.radios}
+                checked={regularity}
+                customStyle="toggle"
+                handleRadioClick={handleRegularity}
+              />
             </FormStep>
           )}
           {isCurrentStep(3) && (
@@ -120,7 +133,14 @@ function App() {
               buttonLabel="Next step"
               allowGoStepBack={true}
             >
-              here checkboxes
+              <BaseCheckboxGroup
+                legend={addOnsCheckboxes.legend}
+                name={addOnsCheckboxes.name}
+                checkboxes={addOnsCheckboxes.checkboxes}
+                regularity={regularity}
+                checked={addOns}
+                handleCheckboxClick={handleAddOns}
+              />
             </FormStep>
           )}
           {isCurrentStep(4) && (
@@ -131,7 +151,15 @@ function App() {
               buttonLabel="Confirm"
               allowGoStepBack={true}
             >
-              here confirmation with option to go back
+              <OrderSummary
+                planLabel={billingPlanRadios.radios[Number(billingPlan)].label}
+                planValueAndCurrency={getValueAndCurrency(
+                  billingPlanRadios.radios[Number(billingPlan)].description,
+                  regularity
+                )}
+                addOnsLabels={"test"}
+                addOnsValuesAndCurrencies={"test2"}
+              />
             </FormStep>
           )}
           {isCurrentStep(5) && (
@@ -139,9 +167,7 @@ function App() {
               heading="Thank you!"
               description="Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need support, please feel free to email us at support@loremgaming.com."
               navigationButtons={false}
-            >
-              finish screen
-            </FormStep>
+            ></FormStep>
           )}
         </div>
       </ButtonClickContext.Provider>

@@ -45,6 +45,7 @@ html {
   --color-bg-light: #eff5ff;
   --color-bg-border: #d6d9e6;
   --color-secondary-light: #abbcff;
+  --color-secondary-lightest: #f8f9ff;
   --color-accent-light: #bee2fd;
   --color-primary: #022959;
   --color-grey: #9699aa;
@@ -74,11 +75,8 @@ html {
   margin: 0;
   padding: 0;
 }
-html,
 body {
-  height: 100%;
-}
-body {
+  min-height: 100%;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -135,6 +133,41 @@ h6 {
   @include visuallyhidden();
 }
 
+// Focus
+
+@mixin focus-outline(
+  $width: rem(3),
+  $color: var(--color-accent-three),
+  $offset: rem(4)
+) {
+  outline-offset: $offset;
+  outline: $width dashed $color;
+}
+
+a,
+input,
+textarea,
+select,
+button {
+  &:focus {
+    /* Provide a fallback style for browsers
+     that don't support :focus-visible */
+    @include focus-outline;
+  }
+
+  &:focus:not(:focus-visible) {
+    /* Remove the focus indicator on mouse-focus for browsers that do support :focus-visible */
+    outline: 0;
+  }
+}
+
+a {
+  &:focus-visible {
+    @include focus-outline;
+    outline-offset: rem(3);
+  }
+}
+
 html {
   background-color: var(--color-bg-light);
   height: 100%;
@@ -146,7 +179,7 @@ body {
 
 #root {
   display: grid;
-  min-height: 100%;
+  min-height: 100vh;
 }
 
 .c-app {
@@ -154,7 +187,6 @@ body {
 
   position: relative;
   height: auto;
-  background-color: var(--color-white);
   font-family: var(--font);
 
   @include min-width(medium) {
@@ -165,16 +197,21 @@ body {
     padding: var(--spacer-16);
     display: grid;
     grid-template-columns: 1fr 2fr;
+    background-color: var(--color-white);
   }
 }
 
 .c-indicator {
   padding: rem(32) rem(16) calc(#{rem(32)} + var(--indicator-bottom-overlap));
   background-color: var(--color-secondary-bg);
+  background-image: url("/images/bg-sidebar-mobile.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
 
   @include min-width(medium) {
     padding: rem(40) rem(32);
     border-radius: var(--spacer-16);
+    background-image: url("/images/bg-sidebar-desktop.svg");
   }
 }
 
@@ -286,7 +323,16 @@ body {
 }
 
 .c-form {
-  margin: rem(40) 10%;
+  background-color: var(--color-white);
+  padding: rem(32) rem(24);
+  margin: rem(-73) 4.5% 0;
+  border-radius: rem(8);
+  @include min-width(medium) {
+    padding: 0;
+    margin: rem(40) 10%;
+    border-radius: 0;
+    background-color: transparent;
+  }
 }
 
 .c-form__heading {
@@ -338,7 +384,8 @@ body {
   padding: rem(14) rem(24);
 }
 
-.c-base-input__group {
+.c-base-input__group,
+.c-toggle-radio__group {
   margin-bottom: rem(24);
 }
 
@@ -372,6 +419,12 @@ body {
   border-radius: rem(8);
   margin-bottom: rem(8);
 
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border: 1px solid var(--color-accent-one);
+  }
+
   &--error {
     border-color: (var(--color-error));
   }
@@ -379,4 +432,265 @@ body {
   ::placeholder {
     color: var(--color-grey);
   }
+}
+
+.c-base-radio__fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1;
+  gap: rem(12);
+  margin-bottom: rem(14);
+
+  @include min-width(medium) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: rem(18);
+    margin-bottom: rem(32);
+  }
+}
+
+.c-base-radio__radio,
+.c-base-checkbox__checkbox {
+  display: block;
+  border: 1px solid var(--color-bg-border);
+  border-radius: rem(8);
+  cursor: pointer;
+
+  &--selected {
+    border: 1px solid var(--color-accent-one);
+    background-color: var(--color-secondary-lightest);
+  }
+
+  &:hover,
+  &:active,
+  &:focus,
+  &:focus-visible {
+    outline: 0;
+    border: 1px solid var(--color-accent-one);
+  }
+}
+
+.c-base-radio__radio {
+  display: grid;
+  gap: rem(14);
+  grid-template-areas: "icon text";
+  grid-template-columns: auto 1fr;
+  padding: rem(20) rem(16);
+
+  @include min-width(medium) {
+    display: block;
+  }
+}
+
+.c-base-radio__icon {
+  grid-area: icon;
+  display: block;
+
+  @include min-width(medium) {
+    margin-bottom: rem(39);
+  }
+}
+
+.c-base-radio__input {
+  @include visuallyhidden();
+
+  &:focus-visible + .c-base-radio__radio {
+    @include focus-outline();
+  }
+}
+
+.c-base-radio__text-area {
+  grid-area: text;
+}
+
+.c-base-radio__label {
+  display: block;
+  font-size: rem(16);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.c-base-radio__description {
+  display: block;
+  font-size: rem(14);
+  color: var(--color-grey);
+}
+
+.c-base-radio__description-detail {
+  display: block;
+  color: var(--color-primary);
+  font-size: rem(12);
+}
+
+// Toggle
+.c-toggle-radio__group {
+  border-radius: rem(8);
+  background-color: var(--color-secondary-lightest);
+  padding: rem(13);
+  display: flex;
+}
+
+.c-toggle-radio__fieldset {
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+  white-space: nowrap;
+
+  // &:active,
+  // &:hover {
+  //   & label:first-of-type:before {
+  //     background: yellow;
+  //   }
+  // }
+}
+
+.c-toggle-radio__radio {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  margin: 0;
+  font-size: rem(18);
+  cursor: pointer;
+  color: var(--color-grey);
+
+  &--selected {
+    color: var(--color-primary);
+  }
+}
+
+.c-toggle-radio__radio .c-toggle-radio__text-area {
+  display: inline-block;
+}
+
+.c-toggle-radio__input {
+  position: absolute;
+  opacity: 0;
+}
+
+.c-toggle-radio__label {
+  font-size: rem(14);
+  font-weight: var(--font-weight-medium);
+}
+
+.c-toggle-radio__radio:first-of-type {
+  padding-right: rem(55);
+}
+
+.c-toggle-radio__radio:last-child {
+  margin-left: -#{rem(65)};
+  padding-left: rem(80);
+}
+
+.c-toggle-radio__fieldset:focus-within
+  .c-toggle-radio__radio:first-of-type:after
+  .c-toggle-radio__text-area {
+  box-shadow: 0 0 0 rem(2) white, 0 0 0 rem(4) var(--color-white);
+}
+
+.c-toggle-radio__radio:first-of-type:before,
+.c-toggle-radio__radio:first-of-type:after {
+  content: "";
+  position: absolute;
+  height: rem(20);
+  overflow: hidden;
+  vertical-align: middle;
+  pointer-events: none;
+}
+
+.c-toggle-radio__radio:first-of-type:before {
+  position: absolute;
+  right: 0;
+  z-index: 2;
+  width: rem(20);
+  background: var(--color-white);
+  border-radius: 1em;
+  transition: all 0.2s ease-in-out;
+  transform: translateX(0) translateY(5px);
+}
+
+.c-toggle-radio__radio:first-of-type:after {
+  margin: 0 rem(10);
+  height: rem(30);
+  width: rem(50);
+  background: var(--color-primary);
+  border-radius: 1em;
+  transition: background 0.2s ease-in-out;
+}
+
+.c-toggle-radio__input:first-of-type:checked
+  ~ .c-toggle-radio__radio:first-of-type:before {
+  transform: translateX(-#{rem(20)}) translateY(5px);
+}
+
+.c-toggle-radio__input:last-of-type:checked
+  ~ .c-toggle-radio__radio:last-of-type {
+  z-index: 1;
+}
+
+.c-toggle-radio__radio {
+  position: relative;
+}
+
+.c-base-checkbox__fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.c-base-checkbox__input {
+  @include visuallyhidden();
+
+  &:focus-visible + .c-base-checkbox__radio {
+    @include focus-outline();
+  }
+}
+
+.c-base-checkbox__checkbox {
+  padding: rem(16) rem(24);
+  display: grid;
+  grid-template-areas: "tick text price";
+  grid-template-columns: auto 1fr auto;
+  margin-bottom: rem(16);
+  gap: rem(24);
+  align-items: center;
+}
+
+.c-base-checkbox__tick {
+  grid-area: tick;
+  width: rem(20);
+  height: rem(20);
+  border: 1px solid var(--color-bg-border);
+  background-color: var(--color-white);
+  border-radius: rem(4);
+
+  .c-base-checkbox__checkbox--selected & {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 1px solid var(--color-secondary-bg);
+    background-color: var(--color-secondary-bg);
+
+    &::after {
+      content: url('data:image/svg+xml,%0A%3Csvg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="white" viewBox="0 0 24 24"%3E%3Cpath d="M9 22l-10-10.598 2.798-2.859 7.149 7.473 13.144-14.016 2.909 2.806z"/%3E%3C/svg%3E');
+    }
+  }
+}
+
+.c-base-checkbox__label {
+  grid-area: text;
+  font-size: rem(16);
+  color: var(--color-primary);
+}
+
+.c-base-checkbox__description {
+  font-size: rem(15);
+  color: var(--color-grey);
+}
+
+.c-base-checkbox__price {
+  grid-area: price;
+  color: var(--color-accent-one);
 }
