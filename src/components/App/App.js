@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.scss";
 import Indicator from "../Indicator/Indicator";
-import FormStep from "../FormStep/FormStep";
+import Step from "../Step/Step";
 import { useForm } from "react-hook-form";
 import {
   initialFirstStepState,
@@ -79,104 +79,104 @@ function App() {
     <div className="c-app">
       <Indicator currentStep={currentStep} setCurrentStep={setCurrentStep} />
       <ButtonClickContext.Provider value={handleStepChange}>
-        <div className="c-form">
-          {isCurrentStep(1) && (
-            <FormStep
-              handleSubmit={handleSubmit}
-              heading="Personal info"
-              description="Please provide your name, email address, and phone number."
-              buttonLabel="Next step"
-            >
-              {firstStepForm.map((input, i) => (
-                <BaseInput
-                  index={i}
-                  label={input.label}
-                  name={input.name}
-                  type={input.type}
-                  rules={input.rules}
-                  value={firstStepFormData[i]}
-                  placeholder={input.placeholder}
-                  register={register}
-                  key={input.name}
-                  errors={errors}
-                  handleMultipleInputs={handleMultipleInputs}
-                />
-              ))}
-            </FormStep>
-          )}
-          {isCurrentStep(2) && (
-            <FormStep
-              handleSubmit={handleSubmit}
-              heading="Select your plan"
-              description="You have the option of monthly or yearly billing."
-              buttonLabel="Next step"
-              allowGoStepBack={true}
-            >
-              <BaseRadio
-                legend={billingPlanRadios.legend}
-                name={billingPlanRadios.name}
-                radios={billingPlanRadios.radios}
-                billingPlanDescription={true}
-                checked={billingPlan}
-                regularityObj={regularityObj}
-                handleRadioClick={handleSetBillingPlan}
+        {isCurrentStep(1) && (
+          <Step
+            handleSubmit={handleSubmit}
+            heading="Personal info"
+            description="Please provide your name, email address, and phone number."
+            buttonLabel="Next step"
+          >
+            {firstStepForm.map((input, i) => (
+              <BaseInput
+                index={i}
+                label={input.label}
+                name={input.name}
+                type={input.type}
+                rules={input.rules}
+                value={firstStepFormData[i]}
+                placeholder={input.placeholder}
+                register={register}
+                key={input.name}
+                errors={errors}
+                handleMultipleInputs={handleMultipleInputs}
               />
-              <BaseRadio
-                legend={radioToggle.legend}
-                name={radioToggle.name}
-                radios={radioToggle.radios}
-                checked={regularity}
-                customStyle="toggle"
-                handleRadioClick={handleRegularity}
-              />
-            </FormStep>
-          )}
-          {isCurrentStep(3) && (
-            <FormStep
-              handleSubmit={handleSubmit}
-              heading="Pick add-ons"
-              description="Add-ons help enhance your gaming experience."
-              buttonLabel="Next step"
-              allowGoStepBack={true}
-            >
-              <BaseCheckboxGroup
-                legend={addOnsCheckboxes.legend}
-                name={addOnsCheckboxes.name}
-                checkboxes={addOnsCheckboxes.checkboxes}
-                regularityObj={regularityObj}
-                checked={addOns}
-                handleCheckboxClick={handleAddOns}
-              />
-            </FormStep>
-          )}
-          {isCurrentStep(4) && (
-            <FormStep
-              handleSubmit={handleSubmit}
-              heading="Finishing up"
-              description="Double-check everything looks OK before confirming."
-              buttonLabel="Confirm"
-              allowGoStepBack={true}
-            >
-              <OrderSummary
-                regularityObj={regularityObj}
-                planLabel={billingPlanRadios.radios[Number(billingPlan)].label}
-                planDetails={
-                  billingPlanRadios.radios[Number(billingPlan)].description
-                }
-                addOnsState={addOns}
-                addOnsDetails={addOnsCheckboxes.checkboxes}
-                handleStepChange={handleStepChange}
-              />
-            </FormStep>
-          )}
-          {isCurrentStep(5) && (
-            <FormStep
-              heading="Thank you!"
-              description="Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need support, please feel free to email us at support@loremgaming.com."
-              navigationButtons={false}
-            ></FormStep>
-          )}
-        </div>
+            ))}
+          </Step>
+        )}
+        {isCurrentStep(2) && (
+          <Step
+            handleSubmit={handleSubmit}
+            heading="Select your plan"
+            description="You have the option of monthly or yearly billing."
+            buttonLabel="Next step"
+            allowGoStepBack={true}
+          >
+            <BaseRadio
+              legend={billingPlanRadios.legend}
+              name={billingPlanRadios.name}
+              radios={billingPlanRadios.radios}
+              billingPlanDescription={true}
+              checked={billingPlan}
+              regularityObj={regularityObj}
+              handleRadioClick={handleSetBillingPlan}
+            />
+            <BaseRadio
+              legend={radioToggle.legend}
+              name={radioToggle.name}
+              radios={radioToggle.radios}
+              checked={regularity}
+              customStyle="toggle"
+              handleRadioClick={handleRegularity}
+            />
+          </Step>
+        )}
+        {isCurrentStep(3) && (
+          <Step
+            handleSubmit={handleSubmit}
+            heading="Pick add-ons"
+            description="Add-ons help enhance your gaming experience."
+            buttonLabel="Next step"
+            allowGoStepBack={true}
+          >
+            <BaseCheckboxGroup
+              legend={addOnsCheckboxes.legend}
+              name={addOnsCheckboxes.name}
+              checkboxes={addOnsCheckboxes.checkboxes}
+              regularityObj={regularityObj}
+              checked={addOns}
+              handleCheckboxClick={handleAddOns}
+            />
+          </Step>
+        )}
+        {isCurrentStep(4) && (
+          <Step
+            handleSubmit={handleSubmit}
+            heading="Finishing up"
+            description="Double-check everything looks OK before confirming."
+            buttonLabel="Confirm"
+            allowGoStepBack={true}
+          >
+            <OrderSummary
+              regularityObj={regularityObj}
+              planLabel={billingPlanRadios.radios[Number(billingPlan)].label}
+              planDetails={
+                billingPlanRadios.radios[Number(billingPlan)].description
+              }
+              addOnsState={addOns}
+              addOnsDetails={addOnsCheckboxes.checkboxes}
+              handleStepChange={handleStepChange}
+            />
+          </Step>
+        )}
+        {isCurrentStep(5) && (
+          <Step
+            formWrapper={false}
+            finalImage={true}
+            heading="Thank you!"
+            description="Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need support, please feel free to email us at support@loremgaming.com."
+            navigationButtons={false}
+          ></Step>
+        )}
       </ButtonClickContext.Provider>
     </div>
   );

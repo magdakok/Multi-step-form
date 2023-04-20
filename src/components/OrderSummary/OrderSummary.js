@@ -70,7 +70,7 @@ function OrderSummary({
       </div>
       <div className="c-order-summary__total">
         <span className="c-order-summary__total-label">
-          Total (per {regularityObj.label})
+          Total (per {regularityObj.period})
         </span>
         <span className="c-order-summary__total-price">
           <BillingPlanDescription

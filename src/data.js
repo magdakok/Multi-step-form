@@ -137,11 +137,13 @@ export const radioToggle = {
       id: "monthly",
       value: "monthly",
       label: "Monthly",
+      period: "month",
     },
     {
       id: "yearly",
       value: "yearly",
       label: "Yearly",
+      period: "year",
     },
   ],
 };

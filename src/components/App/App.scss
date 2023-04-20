@@ -325,7 +325,7 @@ body {
   cursor: pointer;
 }
 
-.c-form {
+.c-step {
   display: grid;
   grid-template-rows: auto 1fr;
   background-color: var(--color-white);
@@ -340,7 +340,7 @@ body {
   }
 }
 
-.c-form__heading {
+.c-step__heading {
   color: var(--color-primary);
   font-size: rem(32);
   line-height: calc(37 / 32);
@@ -348,7 +348,7 @@ body {
   margin-bottom: rem(12);
 }
 
-.c-form__description {
+.c-step__description {
   color: var(--color-grey);
   font-size: rem(16);
   line-height: calc(25 / 16);
@@ -788,4 +788,13 @@ body {
   color: var(--color-accent-one);
   font-size: rem(20);
   font-weight: var(--font-weight-bold);
+}
+
+.c-step--final {
+  text-align: center;
+  align-self: center;
+}
+.c-step__image {
+  display: block;
+  margin: 0 auto rem(32);
 }
