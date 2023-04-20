@@ -5,7 +5,7 @@ function BaseCheckboxGroup({
   legend,
   name,
   checkboxes,
-  regularity,
+  regularityObj,
   checked,
   handleCheckboxClick,
 }) {
@@ -18,7 +18,6 @@ function BaseCheckboxGroup({
         </legend>
         {checkboxes.map((checkbox, i) => {
           const value = i.toString();
-          console.log(checked[i] === true);
           return (
             <React.Fragment key={checkbox.id}>
               <input
@@ -49,7 +48,7 @@ function BaseCheckboxGroup({
                 </span>
                 <span className="c-base-checkbox__price">
                   {getPrice(
-                    ...getValueAndCurrency(checkbox.price, regularity),
+                    ...getValueAndCurrency(checkbox.price, regularityObj),
                     { signDisplay: "always" }
                   )}
                 </span>

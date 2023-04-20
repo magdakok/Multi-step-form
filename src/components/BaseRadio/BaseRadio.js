@@ -5,7 +5,7 @@ function BaseRadio({
   legend,
   name,
   radios,
-  regularity,
+  regularityObj,
   checked,
   customStyle,
   billingPlanDescription,
@@ -49,10 +49,12 @@ function BaseRadio({
                 <span className={`${radioStyle}__text-area`}>
                   <p className={`${radioStyle}__label`}>{radio.label}</p>
                   {billingPlanDescription && (
-                    <BillingPlanDescription
-                      description={radio.description}
-                      regularity={regularity}
-                    />
+                    <span className="c-base-radio__description">
+                      <BillingPlanDescription
+                        description={radio.description}
+                        regularityObj={regularityObj}
+                      />
+                    </span>
                   )}
                 </span>
               </label>

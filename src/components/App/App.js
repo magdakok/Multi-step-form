@@ -34,6 +34,10 @@ function App() {
   const [regularity, setRegularity] = React.useState(0);
   const [addOns, setAddOns] = React.useState(initialAddOns);
 
+  const regularityObj = React.useMemo(() => {
+    return radioToggle.radios[regularity];
+  }, [regularity]);
+
   function isCurrentStep(index) {
     return index === currentStep;
   }
@@ -46,8 +50,10 @@ function App() {
     });
   }, []);
 
-  const handleStepChange = React.useCallback((stepChange) => {
-    setCurrentStep((currentStep) => currentStep + stepChange);
+  const handleStepChange = React.useCallback((stepChange, goToStep = false) => {
+    goToStep
+      ? setCurrentStep(goToStep)
+      : setCurrentStep((currentStep) => currentStep + stepChange);
   }, []);
 
   const handleSetBillingPlan = React.useCallback((value) => {
@@ -112,7 +118,7 @@ function App() {
                 radios={billingPlanRadios.radios}
                 billingPlanDescription={true}
                 checked={billingPlan}
-                regularity={regularity}
+                regularityObj={regularityObj}
                 handleRadioClick={handleSetBillingPlan}
               />
               <BaseRadio
@@ -137,7 +143,7 @@ function App() {
                 legend={addOnsCheckboxes.legend}
                 name={addOnsCheckboxes.name}
                 checkboxes={addOnsCheckboxes.checkboxes}
-                regularity={regularity}
+                regularityObj={regularityObj}
                 checked={addOns}
                 handleCheckboxClick={handleAddOns}
               />
@@ -152,13 +158,14 @@ function App() {
               allowGoStepBack={true}
             >
               <OrderSummary
+                regularityObj={regularityObj}
                 planLabel={billingPlanRadios.radios[Number(billingPlan)].label}
-                planValueAndCurrency={getValueAndCurrency(
-                  billingPlanRadios.radios[Number(billingPlan)].description,
-                  regularity
-                )}
-                addOnsLabels={"test"}
-                addOnsValuesAndCurrencies={"test2"}
+                planDetails={
+                  billingPlanRadios.radios[Number(billingPlan)].description
+                }
+                addOnsState={addOns}
+                addOnsDetails={addOnsCheckboxes.checkboxes}
+                handleStepChange={handleStepChange}
               />
             </FormStep>
           )}

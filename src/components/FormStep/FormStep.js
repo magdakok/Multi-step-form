@@ -14,8 +14,10 @@ function FormStep({
 
   return (
     <>
-      <h2 className="c-form__heading">{heading}</h2>
-      <p className="c-form__description"> {description}</p>
+      <div>
+        <h2 className="c-form__heading">{heading}</h2>
+        <p className="c-form__description"> {description}</p>
+      </div>
 
       <form
         className="c-form-step"

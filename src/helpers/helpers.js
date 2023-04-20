@@ -17,7 +17,9 @@ export function getPrice(value, currency, option) {
   });
 }
 
-export function getValueAndCurrency(object, regularity) {
-  const regularityKey = regularity === 0 ? "monthly" : "yearly";
-  return [object[regularityKey].value, object[regularityKey].currency];
+export function getValueAndCurrency(object, regularityObj) {
+  return [
+    object[regularityObj.value].value,
+    object[regularityObj.value].currency,
+  ];
 }
