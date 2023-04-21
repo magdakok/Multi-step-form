@@ -330,13 +330,17 @@ body {
   grid-template-rows: auto 1fr;
   background-color: var(--color-white);
   padding: rem(32) rem(24);
-  margin: rem(-73) 4.5% 0;
+  margin: rem(-73) 4.5% rem(16); // [overlapping elements]-> negative top margin
   border-radius: rem(8);
   @include min-width(medium) {
     padding: 0;
     margin: rem(40) 10% rem(16);
     border-radius: 0;
     background-color: transparent;
+  }
+
+  .c-app--bottom-nav & {
+    margin: rem(-73) 4.5% rem(93); // [overlapping elements]-> negative top margin needs to be compensated for mobile nav with absolutely positioned nav
   }
 }
 
@@ -797,4 +801,15 @@ body {
 .c-step__image {
   display: block;
   margin: 0 auto rem(32);
+}
+
+.c-step-controllers__mobile-wrapper {
+  position: absolute; // [overlapping elements]-> negatative margin affects it
+  display: block;
+  background-color: var(--color-white);
+  padding: rem(16);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
 }
