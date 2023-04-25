@@ -6,16 +6,12 @@ import "../../styles/utilities.scss";
 import "../../styles/global.scss";
 import css from "./App.module.scss";
 
-// Form validation
-import { useForm } from "react-hook-form";
 import {
   stepControllersProps,
-  initialFirstStepState,
   firstStepForm,
   billingPlanRadios,
   radioToggle,
   addOnsCheckboxes,
-  initialAddOns,
 } from "../../data";
 
 //Components
@@ -30,60 +26,31 @@ import StepControllers from "../StepControllers/StepControllers";
 //Hooks
 import { useCurrentStep } from "../../hooks/useCurrentStep";
 import { useMobile } from "../../hooks/useMobile";
+import { useFormData } from "../../hooks/useFormData";
 
 // Context
 export const IsMobileContext = React.createContext();
 export const StepChangeContext = React.createContext();
 
 function App() {
+  const { currentStep, isCurrentStep, handleStepChange } = useCurrentStep();
+  const { isMobile } = useMobile();
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm({ criteriaMode: "all" });
-  const { currentStep, isCurrentStep, handleStepChange } = useCurrentStep();
-  const { isMobile } = useMobile();
-
-  const [firstStepFormData, setFirstStepFormData] = React.useState(
-    initialFirstStepState
-  );
-  const [billingPlan, setBillingPlan] = React.useState(0);
-  const [regularity, setRegularity] = React.useState(0);
-  const [addOns, setAddOns] = React.useState(initialAddOns);
+    errors,
+    firstStepFormData,
+    billingPlan,
+    regularityObj,
+    handleMultipleInputs,
+    handleSetBillingPlan,
+    handleRegularity,
+    regularity,
+    handleAddOns,
+    addOns,
+  } = useFormData();
 
   const WrapperTag = currentStep < 5 ? "form" : "div";
-
-  const regularityObj = React.useMemo(() => {
-    return radioToggle.radios[regularity];
-  }, [regularity]);
-
-  const handleMultipleInputs = React.useCallback((value, index) => {
-    setFirstStepFormData((currentValue) => {
-      const nextValue = currentValue;
-      nextValue[index] = value;
-      return [...nextValue];
-    });
-  }, []);
-
-  const handleSetBillingPlan = React.useCallback((value) => {
-    setBillingPlan(value);
-  }, []);
-
-  const handleRegularity = React.useCallback((value) => {
-    setRegularity(value);
-  }, []);
-
-  const handleAddOns = React.useCallback(
-    (option) => {
-      const currentOptionValue = addOns[option];
-      setAddOns((currentAddOns) => ({
-        ...currentAddOns,
-        [option]: !currentOptionValue,
-      }));
-    },
-    [addOns]
-  );
-
   const bottomMobileNav = isMobile && !isCurrentStep(5);
 
   return (
