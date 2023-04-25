@@ -1,0 +1,199 @@
+@import "../../styles/variables.scss";
+@import "../../styles/functions.scss";
+@import "../../styles/mixins.scss";
+
+.radioGroup {
+  margin-bottom: rem(24);
+}
+
+.radioRadio {
+  display: grid;
+  gap: rem(14);
+  grid-template-areas: "icon text";
+  grid-template-columns: auto 1fr;
+  padding: rem(20) rem(16);
+
+  @include min-width(medium) {
+    display: block;
+  }
+}
+
+.radioRadio {
+  display: block;
+  border: 1px solid var(--color-bg-border);
+  border-radius: rem(8);
+  cursor: pointer;
+
+  &:hover,
+  &:active,
+  &:focus,
+  &:focus-visible {
+    outline: 0;
+    border: 1px solid var(--color-accent-one);
+  }
+}
+
+.radioFieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1;
+  gap: rem(12);
+  margin-bottom: rem(14);
+
+  @include min-width(medium) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: rem(18);
+    margin-bottom: rem(32);
+  }
+}
+
+.radioRadioSelected {
+  composes: radioRadio;
+  border: 1px solid var(--color-accent-one);
+  background-color: var(--color-secondary-lightest);
+}
+
+.radioLegend {
+  @include visuallyhidden();
+}
+
+.radioIcon {
+  grid-area: icon;
+  display: block;
+
+  @include min-width(medium) {
+    margin-bottom: rem(39);
+  }
+}
+
+.radioInput {
+  @include visuallyhidden();
+
+  &:focus-visible + .c-base-radio__radio {
+    @include focus-outline();
+  }
+}
+
+.radioTextArea {
+  grid-area: text;
+}
+
+.radioLabel {
+  display: block;
+  font-size: rem(16);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.radioDescription {
+  display: block;
+  font-size: rem(14);
+  color: var(--color-grey);
+}
+
+// Toggle
+.toggleGroup {
+  border-radius: rem(8);
+  background-color: var(--color-secondary-lightest);
+  padding: rem(13);
+  margin-bottom: rem(24);
+  display: flex;
+}
+
+.toggleLegend {
+  @include visuallyhidden();
+}
+
+.toggleFieldset {
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+  white-space: nowrap;
+}
+
+.toggleRadio {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  margin: 0;
+  font-size: rem(18);
+  cursor: pointer;
+  color: var(--color-grey);
+}
+
+.toggleRadioSelected {
+  composes: toggleRadio;
+  color: var(--color-primary);
+}
+
+.toggleRadio .toggleTextArea {
+  display: inline-block;
+}
+
+.toggleInput {
+  position: absolute;
+  opacity: 0;
+}
+
+.toggleLabel {
+  font-size: rem(14);
+  font-weight: var(--font-weight-medium);
+}
+
+.toggleRadio:first-of-type {
+  padding-right: rem(55);
+}
+
+.toggleRadio:last-child {
+  margin-left: -#{rem(65)};
+  padding-left: rem(80);
+}
+
+.toggleFieldset:focus-within .toggleRadio:first-of-type:after .toggleTextArea {
+  box-shadow: 0 0 0 rem(2) white, 0 0 0 rem(4) var(--color-white);
+}
+
+.toggleRadio:first-of-type:before,
+.toggleRadio:first-of-type:after {
+  content: "";
+  position: absolute;
+  height: rem(20);
+  overflow: hidden;
+  vertical-align: middle;
+  pointer-events: none;
+}
+
+.toggleRadio:first-of-type:before {
+  position: absolute;
+  right: 0;
+  z-index: 2;
+  width: rem(20);
+  background: var(--color-white);
+  border-radius: 1em;
+  transition: all 0.2s ease-in-out;
+  transform: translateX(0) translateY(5px);
+}
+
+.toggleRadio:first-of-type:after {
+  margin: 0 rem(10);
+  height: rem(30);
+  width: rem(50);
+  background: var(--color-primary);
+  border-radius: 1em;
+  transition: background 0.2s ease-in-out;
+}
+
+.toggleInput:first-of-type:checked ~ .toggleRadio:first-of-type:before {
+  transform: translateX(-#{rem(20)}) translateY(5px);
+}
+
+.toggleInput:last-of-type:checked ~ .toggleRadio:last-of-type {
+  z-index: 1;
+}
+
+.toggleRadio {
+  position: relative;
+}

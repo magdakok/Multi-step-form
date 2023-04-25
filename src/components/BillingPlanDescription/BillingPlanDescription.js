@@ -1,5 +1,6 @@
 import React from "react";
 import { getPrice, getValueAndCurrency } from "../../helpers/helpers";
+import css from "./BillingPlanDescription.module.scss";
 
 function BillingPlanDescription({
   numberValue,
@@ -18,9 +19,7 @@ function BillingPlanDescription({
       <abbr title="per">/</abbr>
       <abbr title={`${data.period}`}>{data.periodShort}</abbr>
       {data.additionalInfo && additionalMessage && (
-        <span className="c-base-radio__description-detail">
-          {data.additionalInfo}
-        </span>
+        <span className={css.detail}>{data.additionalInfo}</span>
       )}
     </>
   );

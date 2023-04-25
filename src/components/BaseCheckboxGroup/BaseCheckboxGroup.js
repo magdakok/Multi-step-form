@@ -1,5 +1,6 @@
 import React from "react";
 import { getPrice, getValueAndCurrency } from "../../helpers/helpers";
+import css from "./BaseCheckboxGroup.module.scss";
 
 function BaseCheckboxGroup({
   legend,
@@ -11,17 +12,15 @@ function BaseCheckboxGroup({
 }) {
   console.log("BaseCheckboxGroup re-rendered");
   return (
-    <div className="c-base-checkbox__group">
-      <fieldset className="c-base-checkbox__fieldset">
-        <legend className="c-base-checkbox__legend visuallyhidden">
-          {legend}
-        </legend>
+    <div>
+      <fieldset className={css.fieldset}>
+        <legend className={css.legend}>{legend}</legend>
         {checkboxes.map((checkbox, i) => {
           const value = i.toString();
           return (
             <React.Fragment key={checkbox.id}>
               <input
-                className="c-base-checkbox__input"
+                className={css.input}
                 type="checkbox"
                 name={name}
                 id={checkbox.id}
@@ -32,21 +31,17 @@ function BaseCheckboxGroup({
                 }}
               />
               <label
-                className={`c-base-checkbox__checkbox ${
-                  checked[i] === true
-                    ? "c-base-checkbox__checkbox--selected"
-                    : ""
-                }`}
+                className={
+                  checked[i] === true ? css.checkboxSelected : css.checkbox
+                }
                 htmlFor={checkbox.id}
               >
-                <span className="c-base-checkbox__tick"></span>
+                <span className={css.tick}></span>
                 <span className="c-base-checkbox__text-area">
-                  <p className="c-base-checkbox__label">{checkbox.label}</p>
-                  <p className="c-base-checkbox__description">
-                    {checkbox.description}
-                  </p>
+                  <p className={css.label}>{checkbox.label}</p>
+                  <p className={css.description}>{checkbox.description}</p>
                 </span>
-                <span className="c-base-checkbox__price">
+                <span className={css.price}>
                   {getPrice(
                     ...getValueAndCurrency(checkbox.price, regularityObj),
                     { signDisplay: "always" }

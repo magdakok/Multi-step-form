@@ -1,0 +1,58 @@
+@import "functions.scss";
+@import "variables.scss";
+
+// Mixins
+@mixin min-width($breakpoint) {
+  @if ($breakpoint == xsmall) {
+    @media (min-width: $breakpoint-xsmall) {
+      @content;
+    }
+  } @else if ($breakpoint == small) {
+    @media (min-width: $breakpoint-small) {
+      @content;
+    }
+  } @else if ($breakpoint == medium) {
+    @media (min-width: $breakpoint-medium) {
+      @content;
+    }
+  } @else if ($breakpoint == large) {
+    @media (min-width: $breakpoint-large) {
+      @content;
+    }
+  } @else if ($breakpoint == xlarge) {
+    @media (min-width: $breakpoint-extra-large) {
+      @content;
+    }
+  } @else {
+    @error "UNKNOWN MEDIA BREAKPOINT #{$breakpoint}";
+  }
+}
+
+@mixin focus-outline(
+  $width: rem(3),
+  $color: var(--color-accent-three),
+  $offset: rem(4)
+) {
+  outline-offset: $offset;
+  outline: $width dashed $color;
+}
+
+@mixin visuallyhidden() {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+@mixin visuallyhidden-reset() {
+  clip: unset;
+  clip-path: unset;
+  height: unset;
+  overflow: unset;
+  position: unset;
+  white-space: unset;
+  width: unset;
+}

@@ -1,0 +1,130 @@
+@import "../../styles/variables.scss";
+@import "../../styles/functions.scss";
+@import "../../styles/mixins.scss";
+
+.container {
+  padding: rem(32) rem(16) calc(#{rem(32)} + var(--indicator-bottom-overlap));
+  background-color: var(--color-secondary-bg);
+  background-image: url("/images/bg-sidebar-mobile.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @include min-width(medium) {
+    padding: rem(40) rem(32);
+    border-radius: var(--spacer-16);
+    background-image: url("/images/bg-sidebar-desktop.svg");
+  }
+}
+
+.list {
+  display: flex;
+  justify-content: center;
+
+  @include min-width(medium) {
+    flex-direction: column;
+    justify-content: left;
+  }
+}
+
+.listItem {
+  text-transform: uppercase;
+
+  &:not(:last-child) {
+    margin-right: rem(30);
+  }
+
+  @include min-width(medium) {
+    &:not(:last-child) {
+      margin-bottom: rem(30);
+      margin-right: 0;
+    }
+  }
+}
+
+.listItem,
+.button {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-template-areas: "number";
+
+  @include min-width(medium) {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas: "number step" "number title";
+    column-gap: rem(16);
+  }
+}
+
+.next,
+.current,
+.past {
+  composes: listItem;
+}
+
+.numberBox {
+  grid-area: number;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  font-size: rem(14);
+  color: var(--color-white);
+  width: rem(33);
+  height: rem(33);
+  border: 1px solid var(--color-white);
+  border-radius: 100px;
+
+  .current & {
+    color: var(--color-primary);
+    background-color: var(--color-accent-light);
+    border: 1px solid var(--color-accent-light);
+  }
+
+  .past & {
+    opacity: 0.6;
+    color: var(--color-primary);
+    background-color: var(--color-accent-light);
+    border: 1px solid var(--color-accent-light);
+  }
+}
+
+.number {
+  display: inline-block;
+}
+
+.stepBox {
+  @include visuallyhidden();
+  grid-area: step;
+  color: var(--color-secondary-light);
+  font-size: rem(12);
+
+  @include min-width(medium) {
+    @include visuallyhidden-reset();
+  }
+}
+
+.label {
+  @include visuallyhidden();
+  letter-spacing: 1px;
+  grid-area: title;
+  color: var(--color-white);
+  font-size: rem(14);
+  font-weight: var(--font-weight-bold);
+
+  @include min-width(medium) {
+    @include visuallyhidden-reset();
+  }
+}
+
+.button {
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  color: inherit;
+  text-transform: inherit;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+}

@@ -1,27 +1,27 @@
 import React from "react";
+import css from "./StepControllers.module.scss";
+import { StepChangeContext } from "../App/App";
 
 function StepControllers({
-  handleStepChange,
   buttonLabel,
   allowGoStepBack = false,
   navigationButtons = true,
 }) {
+  const handleStepChange = React.useContext(StepChangeContext);
+
   return (
     navigationButtons && (
-      <div className="c-form-step__navigation">
+      <div className={css.formNav}>
         {allowGoStepBack && (
           <button
-            className="c-form-step__btn c-form-step__btn--link"
+            className={css.btnLink}
             type="button"
             onClick={() => handleStepChange(-1)}
           >
             Go back
           </button>
         )}
-        <button
-          className="c-form-step__btn c-form-step__btn--primary"
-          type="submit"
-        >
+        <button className={css.btnPrimary} type="submit">
           {buttonLabel}
         </button>
       </div>

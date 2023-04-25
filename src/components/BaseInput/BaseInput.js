@@ -1,5 +1,6 @@
 import React from "react";
 import { ErrorMessage } from "@hookform/error-message";
+import css from "./BaseInput.module.scss";
 
 function BaseInput({
   index = 0,
@@ -31,14 +32,12 @@ function BaseInput({
   );
 
   return (
-    <div className="c-base-input__group">
-      <label className="c-base-input__label" htmlFor={id}>
+    <div className={css.group}>
+      <label className={css.label} htmlFor={id}>
         {label}
       </label>
       <input
-        className={`c-base-input__input ${
-          errorMessages ? "c-base-input__input--error" : ""
-        }`}
+        className={errorMessages ? css.inputWithError : css.input}
         {...delegated}
         {...register(name, {
           ...rules,
@@ -50,7 +49,7 @@ function BaseInput({
         aria-invalid={errorMessages ? "true" : "false"}
         aria-required={register ? "true" : "false"}
       />
-      <p className="c-base-input__error" id={errorId} aria-live="polite">
+      <p className={css.errorMessage} id={errorId} aria-live="polite">
         {errorMessages}
       </p>
     </div>

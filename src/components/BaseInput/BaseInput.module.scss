@@ -1,0 +1,52 @@
+@import "../../styles/variables.scss";
+@import "../../styles/functions.scss";
+@import "../../styles/mixins.scss";
+
+.group {
+  margin-bottom: rem(24);
+}
+
+.label,
+.error {
+  display: block;
+  font-size: rem(14);
+  line-height: calc(16 / 14);
+  margin-bottom: rem(8);
+}
+
+.label {
+  color: var(--color-primary);
+}
+
+.input {
+  font-weight: var(--font-weight-medium);
+  display: block;
+  width: 100%;
+  border: 1px solid var(--color-bg-border);
+  padding: rem(12) rem(16);
+  color: var(--color-primary);
+  font-size: rem(16);
+  line-height: calc(25 / 16);
+  border-radius: rem(8);
+  margin-bottom: rem(8);
+
+  &:focus {
+    outline: none;
+    border: 1px solid var(--color-accent-one) !important;
+  }
+
+  ::placeholder {
+    color: var(--color-grey);
+  }
+}
+
+.inputWithError {
+  composes: input;
+  border-color: (var(--color-error));
+}
+
+.errorMessage {
+  text-align: left;
+  color: var(--color-error);
+  font-weight: var(--font-weight-bold);
+}

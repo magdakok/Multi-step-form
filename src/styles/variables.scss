@@ -1,0 +1,35 @@
+@import "functions.scss";
+
+// Brekpoints
+$breakpoint-xsmall: 320px;
+$breakpoint-small: 576px;
+$breakpoint-medium: 768px;
+$breakpoint-large: 1024px;
+$breakpoint-extra-large: 1300px;
+
+// Colors
+html {
+  --color-black: black;
+  --color-white: white;
+  --color-bg-light: #eff5ff;
+  --color-bg-border: #d6d9e6;
+  --color-secondary-light: #abbcff;
+  --color-secondary-lightest: #f8f9ff;
+  --color-accent-light: #bee2fd;
+  --color-primary: #022959;
+  --color-grey: #9699aa;
+  --color-secondary-button: #928cff;
+  --color-secondary-bg: #6259ff;
+  --color-accent-one: #483eff;
+  --color-accent-two: #ffaf7e;
+  --color-accent-three: #f9818e;
+  --color-error: #ee374a;
+
+  --spacer-16: #{rem(16)};
+  --spacer-48: #{rem(48)};
+
+  --font: "Ubuntu", sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+}

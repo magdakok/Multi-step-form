@@ -1,4 +1,6 @@
 import React from "react";
+import css from "./Indicator.module.scss";
+import { StepChangeContext } from "../App/App";
 
 const STEPS = [
   { index: 1, label: "Your Info" },
@@ -8,12 +10,13 @@ const STEPS = [
 ];
 const LAST_INTERACTIVE_STEP = 4;
 
-function Indicator({ currentStep, setCurrentStep }) {
+function Indicator({ currentStep }) {
+  const handleStepChange = React.useContext(StepChangeContext);
   const hasActiveIndicators = currentStep <= LAST_INTERACTIVE_STEP; // when the final step is achieved all indicators become inactive
 
   return (
-    <div className="c-indicator">
-      <ol className="c-indicator__list" role="list">
+    <div className={css.container}>
+      <ol className={css.list} role="list">
         {STEPS.map((step) => {
           const index = step.index;
           const label = step.label;
@@ -29,8 +32,8 @@ function Indicator({ currentStep, setCurrentStep }) {
               <IndicatorWrapper state={state}>
                 {isInteractive ? (
                   <button
-                    className="c-indicator__button"
-                    onClick={() => setCurrentStep(index)}
+                    className={css.button}
+                    onClick={() => handleStepChange(null, index)}
                   >
                     <IndicatorVisual value={index} />
                     <IndicatorLabel
@@ -61,10 +64,7 @@ function Indicator({ currentStep, setCurrentStep }) {
 function IndicatorWrapper({ state, children }) {
   // state accepts: current | next | past
   return (
-    <li
-      className={`c-indicator__list-item c-indicator__list-item--${state}`}
-      role="listitem"
-    >
+    <li className={css[state]} role="listitem">
       {children}
     </li>
   );
@@ -72,8 +72,8 @@ function IndicatorWrapper({ state, children }) {
 
 function IndicatorVisual({ value }) {
   return (
-    <span className="c-indicator__number-box" role="presentation">
-      <span className="c-indicator__number">{value}</span>
+    <span className={css.numberBox} role="presentation">
+      <span className={css.number}>{value}</span>
     </span>
   );
 }
@@ -82,8 +82,8 @@ function IndicatorLabel({ step, label, hiddenLabel }) {
   return (
     <>
       {hiddenLabel && <span className="visuallyhidden">{hiddenLabel}</span>}
-      <span className="c-indicator__step-box">Step {step}</span>
-      <span className="c-indicator__label">{label}</span>
+      <span className={css.stepBox}>Step {step}</span>
+      <span className={css.label}>{label}</span>
     </>
   );
 }

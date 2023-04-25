@@ -1,5 +1,6 @@
 import React from "react";
 import BillingPlanDescription from "../BillingPlanDescription/BillingPlanDescription";
+import css from "./BaseRadioInput.module.scss";
 
 function BaseRadio({
   legend,
@@ -11,21 +12,21 @@ function BaseRadio({
   billingPlanDescription,
   handleRadioClick,
 }) {
-  const radioStyle =
-    customStyle === "toggle" ? "c-toggle-radio" : "c-base-radio";
+  // const radioStyle =
+  //   customStyle === "toggle" ? "c-toggle-radio" : "c-base-radio";
+
+  const radioStyle = customStyle === "toggle" ? "toggle" : "radio";
 
   return (
-    <div className={`${radioStyle}__group`}>
-      <fieldset className={`${radioStyle}__fieldset`}>
-        <legend className={`${radioStyle}__legend visuallyhidden`}>
-          {legend}
-        </legend>
+    <div className={css[`${radioStyle + "Group"}`]}>
+      <fieldset className={css[`${radioStyle + "Fieldset"}`]}>
+        <legend className={css[`${radioStyle + "Legend"}`]}>{legend}</legend>
         {radios.map((radio, i) => {
           const value = i;
           return (
             <React.Fragment key={radio.id}>
               <input
-                className={`${radioStyle}__input`}
+                className={css[`${radioStyle + "Input"}`]}
                 type="radio"
                 name={name}
                 id={radio.id}
@@ -36,20 +37,24 @@ function BaseRadio({
                 }}
               />
               <label
-                className={`${radioStyle}__radio ${
-                  checked === value ? radioStyle + "__radio--selected" : ""
-                }`}
+                className={
+                  checked === value
+                    ? css[`${radioStyle + "RadioSelected"}`]
+                    : css[`${radioStyle + "Radio"}`]
+                }
                 htmlFor={radio.id}
               >
                 {radio.svgIcon && (
-                  <span className={`${radioStyle}__icon`}>
+                  <span className={css[`${radioStyle + "Icon"}`]}>
                     <span dangerouslySetInnerHTML={{ __html: radio.svgIcon }} />
                   </span>
                 )}
-                <span className={`${radioStyle}__text-area`}>
-                  <p className={`${radioStyle}__label`}>{radio.label}</p>
+                <span className={css[`${radioStyle + "TextArea"}`]}>
+                  <p className={css[`${radioStyle + "Label"}`]}>
+                    {radio.label}
+                  </p>
                   {billingPlanDescription && (
-                    <span className="c-base-radio__description">
+                    <span className={css[`${radioStyle + "Description"}`]}>
                       <BillingPlanDescription
                         description={radio.description}
                         regularityObj={regularityObj}

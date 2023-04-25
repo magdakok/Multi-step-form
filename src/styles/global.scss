@@ -1,0 +1,40 @@
+@import "mixins.scss";
+@import "variables.scss";
+
+a,
+input,
+textarea,
+select,
+button {
+  &:focus {
+    /* Provide a fallback style for browsers
+     that don't support :focus-visible */
+    @include focus-outline;
+  }
+
+  &:focus:not(:focus-visible) {
+    /* Remove the focus indicator on mouse-focus for browsers that do support :focus-visible */
+    outline: 0;
+  }
+}
+
+a {
+  &:focus-visible {
+    @include focus-outline;
+    outline-offset: rem(3);
+  }
+}
+
+html {
+  background-color: var(--color-bg-light);
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+#root {
+  display: grid;
+  min-height: 100vh;
+}
