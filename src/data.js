@@ -1,3 +1,24 @@
+export const stepControllersProps = {
+  1: {
+    buttonLabel: "Next step",
+  },
+  2: {
+    buttonLabel: "Next step",
+    allowGoStepBack: true,
+  },
+  3: {
+    buttonLabel: "Next step",
+    allowGoStepBack: true,
+  },
+  4: {
+    buttonLabel: "Confirm",
+    allowGoStepBack: true,
+  },
+  5: {
+    navigationButtons: false,
+  },
+};
+
 export const firstStepForm = [
   {
     label: "Name",

@@ -1,13 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
+
+// Styles
 import "../../styles/reset.scss";
 import "../../styles/utilities.scss";
 import "../../styles/global.scss";
 import css from "./App.module.scss";
 
-import Indicator from "../Indicator/Indicator";
-import Step from "../Step/Step";
+// Form validation
 import { useForm } from "react-hook-form";
 import {
+  stepControllersProps,
   initialFirstStepState,
   firstStepForm,
   billingPlanRadios,
@@ -15,16 +17,23 @@ import {
   addOnsCheckboxes,
   initialAddOns,
 } from "../../data";
+
+//Components
+import Indicator from "../Indicator/Indicator";
+import Step from "../Step/Step";
 import BaseInput from "../BaseInput/BaseInput";
 import BaseRadio from "../BaseRadio/BaseRadio";
 import BaseCheckboxGroup from "../BaseCheckboxGroup/BaseCheckboxGroup";
 import OrderSummary from "../OrderSummary/OrderSummary";
 import StepControllers from "../StepControllers/StepControllers";
 
+//Hooks
+import { useCurrentStep } from "../../hooks/useCurrentStep";
+import { useMobile } from "../../hooks/useMobile";
+
+// Context
 export const IsMobileContext = React.createContext();
 export const StepChangeContext = React.createContext();
-
-const mobileQuery = "(max-width: 767px)";
 
 function App() {
   const {
@@ -32,36 +41,21 @@ function App() {
     handleSubmit,
     formState: { errors },
   } = useForm({ criteriaMode: "all" });
-  const [currentStep, setCurrentStep] = React.useState(1);
+  const { currentStep, isCurrentStep, handleStepChange } = useCurrentStep();
+  const { isMobile } = useMobile();
+
   const [firstStepFormData, setFirstStepFormData] = React.useState(
     initialFirstStepState
   );
   const [billingPlan, setBillingPlan] = React.useState(0);
   const [regularity, setRegularity] = React.useState(0);
   const [addOns, setAddOns] = React.useState(initialAddOns);
-  const [isMobile, setIsMobile] = React.useState(false);
 
   const WrapperTag = currentStep < 5 ? "form" : "div";
-
-  useEffect(() => {
-    const mql = window.matchMedia(mobileQuery);
-    setIsMobile(mql.matches);
-    mql.addEventListener("change", () => {
-      setIsMobile(mql.matches);
-    });
-
-    return () => {
-      mql.removeEventListener("change", setIsMobile(mql.matches));
-    };
-  }, []);
 
   const regularityObj = React.useMemo(() => {
     return radioToggle.radios[regularity];
   }, [regularity]);
-
-  function isCurrentStep(index) {
-    return index === currentStep;
-  }
 
   const handleMultipleInputs = React.useCallback((value, index) => {
     setFirstStepFormData((currentValue) => {
@@ -69,13 +63,6 @@ function App() {
       nextValue[index] = value;
       return [...nextValue];
     });
-  }, []);
-
-  const handleStepChange = React.useCallback((stepChange, goToStep = false) => {
-    console.log("clicked");
-    goToStep
-      ? setCurrentStep(goToStep)
-      : setCurrentStep((currentStep) => currentStep + stepChange);
   }, []);
 
   const handleSetBillingPlan = React.useCallback((value) => {
@@ -98,27 +85,6 @@ function App() {
   );
 
   const bottomMobileNav = isMobile && !isCurrentStep(5);
-
-  const stepControllersProps = {
-    1: {
-      buttonLabel: "Next step",
-    },
-    2: {
-      buttonLabel: "Next step",
-      allowGoStepBack: true,
-    },
-    3: {
-      buttonLabel: "Next step",
-      allowGoStepBack: true,
-    },
-    4: {
-      buttonLabel: "Confirm",
-      allowGoStepBack: true,
-    },
-    5: {
-      navigationButtons: false,
-    },
-  };
 
   return (
     <StepChangeContext.Provider value={handleStepChange}>
