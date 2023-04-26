@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-import { initialFirstStepState, radioToggle, initialAddOns } from "../data";
+import { initialFirstStepState, radioToggle, initialAddOns } from "../../data";
 
 export function useFormData() {
   const {

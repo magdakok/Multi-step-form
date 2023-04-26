@@ -21,6 +21,11 @@
   }
 }
 
+.stepsWrapper {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
 .controllersMobileWrapper {
   position: absolute; // [overlapping elements]-> negatative margin affects it
   display: block;

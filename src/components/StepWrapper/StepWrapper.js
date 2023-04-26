@@ -1,10 +1,10 @@
 import React from "react";
 import StepControllers from "../StepControllers/StepControllers";
 import ThankYouSvg from "../../images/icon-thank-you.svg";
-import css from "./Step.module.scss";
+import css from "./StepWrapper.module.scss";
 import { IsMobileContext } from "../App/App";
 
-function Step({
+function StepWrapper({
   heading,
   description,
   stepControllersProps,
@@ -30,4 +30,4 @@ function Step({
   );
 }
 
-export default Step;
+export default StepWrapper;
