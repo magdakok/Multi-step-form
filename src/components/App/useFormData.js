@@ -37,16 +37,13 @@ export function useFormData() {
     setRegularity(value);
   }, []);
 
-  const handleAddOns = React.useCallback(
-    (option) => {
-      const currentOptionValue = addOns[option];
-      setAddOns((currentAddOns) => ({
-        ...currentAddOns,
-        [option]: !currentOptionValue,
-      }));
-    },
-    [addOns]
-  );
+  const handleAddOns = React.useCallback((option) => {
+    const currentOptionValue = addOns[option];
+    setAddOns((currentAddOns) => ({
+      ...currentAddOns,
+      [option]: !currentOptionValue,
+    }));
+  });
 
   return {
     register,

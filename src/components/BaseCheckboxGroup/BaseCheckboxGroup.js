@@ -10,7 +10,6 @@ function BaseCheckboxGroup({
   checked,
   handleCheckboxClick,
 }) {
-  console.log("BaseCheckboxGroup re-rendered");
   return (
     <div>
       <fieldset className={css.fieldset}>

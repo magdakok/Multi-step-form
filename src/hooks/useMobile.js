@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 const mobileQuery = "(max-width: 767px)";
 
 export function useMobile() {

@@ -14,7 +14,6 @@ function BaseInput({
   handleMultipleInputs,
   ...delegated
 }) {
-  console.log("BaseInput re-rendered");
   const id = React.useId();
   const errorId = `${id}-error`;
 

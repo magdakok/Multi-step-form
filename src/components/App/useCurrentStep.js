@@ -8,7 +8,6 @@ export function useCurrentStep(index) {
   }
 
   const handleStepChange = React.useCallback((stepChange, goToStep = false) => {
-    console.log("clicked");
     goToStep
       ? setCurrentStep(goToStep)
       : setCurrentStep((currentStep) => currentStep + stepChange);

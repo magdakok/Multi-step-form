@@ -72,7 +72,7 @@
 .radioInput {
   @include visuallyhidden();
 
-  &:focus-visible + .c-base-radio__radio {
+  &:focus-visible + .radioRadio {
     @include focus-outline();
   }
 }
@@ -136,6 +136,10 @@
 .toggleInput {
   position: absolute;
   opacity: 0;
+
+  &:focus-visible + .toggleRadio {
+    @include focus-outline();
+  }
 }
 
 .toggleLabel {

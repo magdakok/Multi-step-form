@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext } from "react";
 
 // Styles
 import "../../styles/reset.scss";
@@ -19,8 +19,8 @@ import { useFormData } from "./useFormData";
 import { useMobile } from "../../hooks/useMobile";
 
 // Context
-export const IsMobileContext = React.createContext();
-export const StepChangeContext = React.createContext();
+export const IsMobileContext = createContext();
+export const StepChangeContext = createContext();
 
 function App() {
   const { currentStep, isCurrentStep, handleStepChange } = useCurrentStep();

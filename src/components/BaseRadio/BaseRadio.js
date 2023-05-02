@@ -1,6 +1,6 @@
 import React from "react";
 import BillingPlanDescription from "../BillingPlanDescription/BillingPlanDescription";
-import css from "./BaseRadioInput.module.scss";
+import css from "./BaseRadio.module.scss";
 
 function BaseRadio({
   legend,
@@ -12,9 +12,6 @@ function BaseRadio({
   billingPlanDescription,
   handleRadioClick,
 }) {
-  // const radioStyle =
-  //   customStyle === "toggle" ? "c-toggle-radio" : "c-base-radio";
-
   const radioStyle = customStyle === "toggle" ? "toggle" : "radio";
 
   return (

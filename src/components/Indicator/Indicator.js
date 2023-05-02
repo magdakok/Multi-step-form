@@ -22,9 +22,7 @@ function Indicator({ currentStep }) {
           const label = step.label;
           const isCurrent = hasActiveIndicators && index === currentStep;
           const isNext = hasActiveIndicators && index > currentStep;
-
           const state = isCurrent ? "current" : isNext ? "next" : "past";
-
           const isInteractive = hasActiveIndicators && index < currentStep; // steps are interactive when before current one AND when the final step is achieved
 
           return (
