@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext } from "react";
 import css from "./StepControllers.module.scss";
 import { StepChangeContext } from "../App/App";
 
@@ -7,7 +7,7 @@ function StepControllers({
   allowGoStepBack = false,
   navigationButtons = true,
 }) {
-  const handleStepChange = React.useContext(StepChangeContext);
+  const handleStepChange = useContext(StepChangeContext);
 
   return (
     navigationButtons && (

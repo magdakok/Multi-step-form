@@ -1,4 +1,4 @@
-import React from "react";
+import { useCallback, useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 
 import { initialFirstStepState, radioToggle, initialAddOns } from "../../data";
@@ -10,18 +10,18 @@ export function useFormData() {
     formState: { errors },
   } = useForm({ criteriaMode: "all" });
 
-  const [firstStepFormData, setFirstStepFormData] = React.useState(
+  const [firstStepFormData, setFirstStepFormData] = useState(
     initialFirstStepState
   );
-  const [billingPlan, setBillingPlan] = React.useState(0);
-  const [regularity, setRegularity] = React.useState(0);
-  const [addOns, setAddOns] = React.useState(initialAddOns);
+  const [billingPlan, setBillingPlan] = useState(0);
+  const [regularity, setRegularity] = useState(0);
+  const [addOns, setAddOns] = useState(initialAddOns);
 
-  const regularityObj = React.useMemo(() => {
+  const regularityObj = useMemo(() => {
     return radioToggle.radios[regularity];
   }, [regularity]);
 
-  const handleMultipleInputs = React.useCallback((value, index) => {
+  const handleMultipleInputs = useCallback((value, index) => {
     setFirstStepFormData((currentValue) => {
       const nextValue = currentValue;
       nextValue[index] = value;
@@ -29,15 +29,15 @@ export function useFormData() {
     });
   }, []);
 
-  const handleSetBillingPlan = React.useCallback((value) => {
+  const handleSetBillingPlan = useCallback((value) => {
     setBillingPlan(value);
   }, []);
 
-  const handleRegularity = React.useCallback((value) => {
+  const handleRegularity = useCallback((value) => {
     setRegularity(value);
   }, []);
 
-  const handleAddOns = React.useCallback((option) => {
+  const handleAddOns = useCallback((option) => {
     const currentOptionValue = addOns[option];
     setAddOns((currentAddOns) => ({
       ...currentAddOns,

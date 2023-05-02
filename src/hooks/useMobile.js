@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 const mobileQuery = "(max-width: 767px)";
 
 export function useMobile() {
-  const [isMobile, setIsMobile] = React.useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const mql = window.matchMedia(mobileQuery);

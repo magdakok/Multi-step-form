@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 import { ErrorMessage } from "@hookform/error-message";
 import css from "./BaseInput.module.scss";
 
@@ -14,7 +14,7 @@ function BaseInput({
   handleMultipleInputs,
   ...delegated
 }) {
-  const id = React.useId();
+  const id = useId();
   const errorId = `${id}-error`;
 
   const errorMessages = errors[name] && (

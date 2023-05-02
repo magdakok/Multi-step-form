@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext } from "react";
 import StepControllers from "../StepControllers/StepControllers";
 import ThankYouSvg from "../../images/icon-thank-you.svg";
 import css from "./StepWrapper.module.scss";
@@ -12,7 +12,7 @@ function StepWrapper({
   finalImage = false,
   children,
 }) {
-  const isMobile = React.useContext(IsMobileContext);
+  const isMobile = useContext(IsMobileContext);
   return (
     <div className={finalImage ? css.stepFinal : css.step}>
       <div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, memo } from "react";
 import css from "./Indicator.module.scss";
 import { StepChangeContext } from "../App/App";
 
@@ -11,7 +11,7 @@ const STEPS = [
 const LAST_INTERACTIVE_STEP = 4;
 
 function Indicator({ currentStep }) {
-  const handleStepChange = React.useContext(StepChangeContext);
+  const handleStepChange = useContext(StepChangeContext);
   const hasActiveIndicators = currentStep <= LAST_INTERACTIVE_STEP; // when the final step is achieved all indicators become inactive
 
   return (
@@ -86,4 +86,4 @@ function IndicatorLabel({ step, label, hiddenLabel }) {
   );
 }
 
-export default React.memo(Indicator);
+export default memo(Indicator);

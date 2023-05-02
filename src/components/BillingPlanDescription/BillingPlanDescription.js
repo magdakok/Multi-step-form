@@ -1,4 +1,3 @@
-import React from "react";
 import { getPrice, getValueAndCurrency } from "../../helpers/helpers";
 import css from "./BillingPlanDescription.module.scss";
 

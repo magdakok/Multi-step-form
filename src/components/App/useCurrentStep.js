@@ -1,13 +1,13 @@
-import React from "react";
+import { useCallback, useState } from "react";
 
 export function useCurrentStep(index) {
-  const [currentStep, setCurrentStep] = React.useState(1);
+  const [currentStep, setCurrentStep] = useState(1);
 
   function isCurrentStep(index) {
     return index === currentStep;
   }
 
-  const handleStepChange = React.useCallback((stepChange, goToStep = false) => {
+  const handleStepChange = useCallback((stepChange, goToStep = false) => {
     goToStep
       ? setCurrentStep(goToStep)
       : setCurrentStep((currentStep) => currentStep + stepChange);

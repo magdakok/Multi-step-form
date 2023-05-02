@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext } from "react";
 import BillingPlanDescription from "../BillingPlanDescription/BillingPlanDescription";
 import { StepChangeContext } from "../App/App";
 import css from "./OrderSummary.module.scss";
@@ -10,7 +10,7 @@ function OrderSummary({
   addOnsState,
   addOnsDetails,
 }) {
-  const handleStepChange = React.useContext(StepChangeContext);
+  const handleStepChange = useContext(StepChangeContext);
 
   const addons = [];
   let totalPrice = planDetails[regularityObj.value].value;
