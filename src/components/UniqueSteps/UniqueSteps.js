@@ -27,6 +27,7 @@ function UniqueSteps({
   handleAddOns,
   addOns,
   currentStep,
+  isMobile,
 }) {
   return (
     <>
@@ -35,6 +36,7 @@ function UniqueSteps({
           heading="Personal info"
           description="Please provide your name, email address, and phone number."
           stepControllersProps={stepControllersProps[1]}
+          isMobile={isMobile}
         >
           {firstStepForm.map((input, i) => (
             <BaseInput

@@ -19,7 +19,6 @@ import { useFormData } from "./useFormData";
 import { useMobile } from "../../hooks/useMobile";
 
 // Context
-export const IsMobileContext = createContext();
 export const StepChangeContext = createContext();
 
 function App() {
@@ -47,32 +46,31 @@ function App() {
     <StepChangeContext.Provider value={handleStepChange}>
       <div className={css.app}>
         <Indicator currentStep={currentStep} />
-        <IsMobileContext.Provider value={isMobile}>
-          <WrapperTag
-            className={css.stepsWrapper}
-            onSubmit={handleSubmit(() => handleStepChange(1))}
-          >
-            <UniqueSteps
-              currentStep={currentStep}
-              register={register}
-              errors={errors}
-              firstStepFormData={firstStepFormData}
-              billingPlan={billingPlan}
-              regularityObj={regularityObj}
-              handleMultipleInputs={handleMultipleInputs}
-              handleSetBillingPlan={handleSetBillingPlan}
-              handleRegularity={handleRegularity}
-              regularity={regularity}
-              handleAddOns={handleAddOns}
-              addOns={addOns}
-            />
-            {bottomMobileNav && (
-              <div className={css.controllersMobileWrapper}>
-                <StepControllers {...stepControllersProps[currentStep]} />
-              </div>
-            )}
-          </WrapperTag>
-        </IsMobileContext.Provider>
+        <WrapperTag
+          className={css.stepsWrapper}
+          onSubmit={handleSubmit(() => handleStepChange(1))}
+        >
+          <UniqueSteps
+            currentStep={currentStep}
+            register={register}
+            errors={errors}
+            firstStepFormData={firstStepFormData}
+            billingPlan={billingPlan}
+            regularityObj={regularityObj}
+            handleMultipleInputs={handleMultipleInputs}
+            handleSetBillingPlan={handleSetBillingPlan}
+            handleRegularity={handleRegularity}
+            regularity={regularity}
+            handleAddOns={handleAddOns}
+            addOns={addOns}
+            isMobile={isMobile}
+          />
+          {bottomMobileNav && (
+            <div className={css.controllersMobileWrapper}>
+              <StepControllers {...stepControllersProps[currentStep]} />
+            </div>
+          )}
+        </WrapperTag>
       </div>
     </StepChangeContext.Provider>
   );
