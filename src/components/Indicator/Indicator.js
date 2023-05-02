@@ -1,13 +1,8 @@
 import React, { useContext, memo } from "react";
 import css from "./Indicator.module.scss";
 import { StepChangeContext } from "../App/App";
+import { steps } from "../../data";
 
-const STEPS = [
-  { index: 1, label: "Your Info" },
-  { index: 2, label: "Select Plan" },
-  { index: 3, label: "Add Ons" },
-  { index: 4, label: "Summary" },
-];
 const LAST_INTERACTIVE_STEP = 4;
 
 function Indicator({ currentStep }) {
@@ -19,7 +14,7 @@ function Indicator({ currentStep }) {
       {
         // eslint-disable-next-line
         <ol className={css.list} role="list">
-          {STEPS.map((step) => {
+          {steps.map((step) => {
             const index = step.index;
             const label = step.label;
             const isCurrent = hasActiveIndicators && index === currentStep;

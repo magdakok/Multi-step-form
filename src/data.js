@@ -1,3 +1,10 @@
+export const steps = [
+  { index: 1, label: "Your Info" },
+  { index: 2, label: "Select Plan" },
+  { index: 3, label: "Add Ons" },
+  { index: 4, label: "Summary" },
+];
+
 export const stepControllersProps = {
   1: {
     buttonLabel: "Next step",
