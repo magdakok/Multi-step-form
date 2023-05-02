@@ -44,11 +44,12 @@ function App() {
 
   return (
     <StepChangeContext.Provider value={handleStepChange}>
-      <div className={css.app}>
+      <main className={css.app}>
         <Indicator currentStep={currentStep} />
         <WrapperTag
           className={css.stepsWrapper}
           onSubmit={handleSubmit(() => handleStepChange(1))}
+          aria-live="polite"
         >
           <UniqueSteps
             currentStep={currentStep}
@@ -71,7 +72,7 @@ function App() {
             </div>
           )}
         </WrapperTag>
-      </div>
+      </main>
     </StepChangeContext.Provider>
   );
 }

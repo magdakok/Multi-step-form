@@ -60,6 +60,7 @@ function UniqueSteps({
           heading="Select your plan"
           description="You have the option of monthly or yearly billing."
           stepControllersProps={stepControllersProps[2]}
+          isMobile={isMobile}
         >
           <BaseRadio
             legend={billingPlanRadios.legend}
@@ -85,6 +86,7 @@ function UniqueSteps({
           heading="Pick add-ons"
           description="Add-ons help enhance your gaming experience."
           stepControllersProps={stepControllersProps[3]}
+          isMobile={isMobile}
         >
           <BaseCheckboxGroup
             legend={addOnsCheckboxes.legend}
@@ -101,6 +103,7 @@ function UniqueSteps({
           heading="Finishing up"
           description="Double-check everything looks OK before confirming."
           stepControllersProps={stepControllersProps[4]}
+          isMobile={isMobile}
         >
           <OrderSummary
             regularityObj={regularityObj}
@@ -120,6 +123,7 @@ function UniqueSteps({
           heading="Thank you!"
           description="Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need support, please feel free to email us at support@loremgaming.com."
           stepControllersProps={stepControllersProps[5]}
+          isMobile={isMobile}
         ></StepWrapper>
       )}
     </>

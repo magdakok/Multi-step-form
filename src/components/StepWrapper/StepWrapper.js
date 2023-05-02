@@ -15,7 +15,7 @@ function StepWrapper({
     <div className={finalImage ? css.stepFinal : css.step}>
       <div>
         {finalImage && <img className={css.image} src={ThankYouSvg} alt="" />}
-        <h2 className={css.heading}>{heading}</h2>
+        <h1 className={css.heading}>{heading}</h1>
         <p className={css.description}> {description}</p>
       </div>
       {formWrapper && (
