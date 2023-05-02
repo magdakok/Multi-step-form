@@ -37,13 +37,13 @@ export function useFormData() {
     setRegularity(value);
   }, []);
 
-  const handleAddOns = useCallback((option) => {
+  const handleAddOns = (option) => {
     const currentOptionValue = addOns[option];
     setAddOns((currentAddOns) => ({
       ...currentAddOns,
       [option]: !currentOptionValue,
     }));
-  });
+  };
 
   return {
     register,
