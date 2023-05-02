@@ -38,6 +38,10 @@
   ::placeholder {
     color: var(--color-grey);
   }
+
+  html[data-whatintent="keyboard"] &:focus {
+    @include focus-outline();
+  }
 }
 
 .inputWithError {
