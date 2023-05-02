@@ -24,6 +24,11 @@
 .stepsWrapper {
   display: grid;
   grid-template-rows: 1fr;
+  padding-bottom: rem(80);
+
+  @include min-width(medium) {
+    padding: 0;
+  }
 }
 
 .controllersMobileWrapper {

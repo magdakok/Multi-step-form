@@ -45,7 +45,7 @@ function App() {
 
   return (
     <StepChangeContext.Provider value={handleStepChange}>
-      <div className={bottomMobileNav ? css.app : css.app}>
+      <div className={css.app}>
         <Indicator currentStep={currentStep} />
         <IsMobileContext.Provider value={isMobile}>
           <WrapperTag
