@@ -16,45 +16,48 @@ function Indicator({ currentStep }) {
 
   return (
     <div className={css.container}>
-      <ol className={css.list} role="list">
-        {STEPS.map((step) => {
-          const index = step.index;
-          const label = step.label;
-          const isCurrent = hasActiveIndicators && index === currentStep;
-          const isNext = hasActiveIndicators && index > currentStep;
-          const state = isCurrent ? "current" : isNext ? "next" : "past";
-          const isInteractive = hasActiveIndicators && index < currentStep; // steps are interactive when before current one AND when the final step is achieved
+      {
+        // eslint-disable-next-line
+        <ol className={css.list} role="list">
+          {STEPS.map((step) => {
+            const index = step.index;
+            const label = step.label;
+            const isCurrent = hasActiveIndicators && index === currentStep;
+            const isNext = hasActiveIndicators && index > currentStep;
+            const state = isCurrent ? "current" : isNext ? "next" : "past";
+            const isInteractive = hasActiveIndicators && index < currentStep; // steps are interactive when before current one AND when the final step is achieved
 
-          return (
-            <React.Fragment key={index}>
-              <IndicatorWrapper state={state}>
-                {isInteractive ? (
-                  <button
-                    className={css.button}
-                    onClick={() => handleStepChange(null, index)}
-                  >
-                    <IndicatorVisual value={index} />
-                    <IndicatorLabel
-                      step={index}
-                      label={label}
-                      hiddenLabel="Completed: "
-                    />
-                  </button>
-                ) : (
-                  <>
-                    <IndicatorVisual value={index} />
-                    <IndicatorLabel
-                      step={index}
-                      label={label}
-                      hiddenLabel={isCurrent && "Current: "}
-                    />
-                  </>
-                )}
-              </IndicatorWrapper>
-            </React.Fragment>
-          );
-        })}
-      </ol>
+            return (
+              <React.Fragment key={index}>
+                <IndicatorWrapper state={state}>
+                  {isInteractive ? (
+                    <button
+                      className={css.button}
+                      onClick={() => handleStepChange(null, index)}
+                    >
+                      <IndicatorVisual value={index} />
+                      <IndicatorLabel
+                        step={index}
+                        label={label}
+                        hiddenLabel="Completed: "
+                      />
+                    </button>
+                  ) : (
+                    <>
+                      <IndicatorVisual value={index} />
+                      <IndicatorLabel
+                        step={index}
+                        label={label}
+                        hiddenLabel={isCurrent && "Current: "}
+                      />
+                    </>
+                  )}
+                </IndicatorWrapper>
+              </React.Fragment>
+            );
+          })}
+        </ol>
+      }
     </div>
   );
 }
@@ -62,6 +65,7 @@ function Indicator({ currentStep }) {
 function IndicatorWrapper({ state, children }) {
   // state accepts: current | next | past
   return (
+    // eslint-disable-next-line
     <li className={css[state]} role="listitem">
       {children}
     </li>

@@ -48,8 +48,10 @@ function OrderSummary({
         </div>
 
         {addons.length > 0 && (
+          // eslint-disable-next-line
           <ul className={css.addonsList} role="list">
             {addons.map((addon) => (
+              // eslint-disable-next-line
               <li className={css.addonsItem} role="listitem" key={addon.id}>
                 <span className={css.addonsLabel}>{addon.label}</span>
                 <span className={css.addonsPrice}>
