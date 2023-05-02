@@ -1,7 +1,7 @@
 import React, { useId } from "react";
 import { ErrorMessage } from "@hookform/error-message";
 import css from "./BaseInput.module.scss";
-import whatInput from "what-input";
+import "what-input";
 
 function BaseInput({
   index = 0,
