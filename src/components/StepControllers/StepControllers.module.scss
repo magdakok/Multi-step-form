@@ -24,16 +24,23 @@
   composes: button;
   background-color: var(--color-white);
   color: var(--color-grey);
+
+  &:hover,
+  &:active {
+    text-decoration: underline;
+  }
 }
 
 .btnPrimary {
   composes: button;
+  @include baseTransition();
   padding: rem(14) rem(24);
   background-color: var(--color-primary);
   border-radius: rem(8);
   color: var(--color-white);
 
-  &:hover {
+  &:hover,
+  &:active {
     background-color: var(--color-secondary-button);
   }
 }

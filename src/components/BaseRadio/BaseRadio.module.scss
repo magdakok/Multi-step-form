@@ -19,6 +19,7 @@
 }
 
 .radioRadio {
+  @include baseTransition();
   display: block;
   border: 1px solid var(--color-bg-border);
   border-radius: rem(8);
@@ -52,6 +53,7 @@
 
 .radioRadioSelected {
   composes: radioRadio;
+  @include baseTransition();
   background-color: var(--color-secondary-lightest);
   border: 1px solid var(--color-accent-one);
 }
@@ -126,6 +128,7 @@
 
 .toggleRadioSelected {
   composes: toggleRadio;
+  @include baseTransition();
   color: var(--color-primary);
 }
 
@@ -171,23 +174,23 @@
 }
 
 .toggleRadio:first-of-type:before {
+  @include baseTransition();
   position: absolute;
   right: 0;
   z-index: 2;
   width: rem(20);
   background: var(--color-white);
   border-radius: 1em;
-  transition: all 0.2s ease-in-out;
   transform: translateX(0) translateY(5px);
 }
 
 .toggleRadio:first-of-type:after {
+  @include baseTransition();
   margin: 0 rem(10);
   height: rem(30);
   width: rem(50);
   background: var(--color-primary);
   border-radius: 1em;
-  transition: background 0.2s ease-in-out;
 }
 
 .toggleInput:first-of-type:checked ~ .toggleRadio:first-of-type:before {

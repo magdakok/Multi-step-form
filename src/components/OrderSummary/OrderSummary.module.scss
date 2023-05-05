@@ -23,6 +23,7 @@
 }
 
 .planChange {
+  @include baseTransition();
   margin: 0;
   padding: 0;
   background-color: transparent;

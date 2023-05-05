@@ -56,3 +56,7 @@
   clip-path: unset;
   white-space: unset;
 }
+
+@mixin baseTransition() {
+  transition: all 0.2s ease-in-out;
+}

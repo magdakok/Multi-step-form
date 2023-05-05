@@ -64,6 +64,7 @@
 }
 
 .numberBox {
+  @include baseTransition();
   display: grid;
   justify-content: center;
   align-content: center;
