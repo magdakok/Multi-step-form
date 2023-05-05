@@ -1,20 +1,21 @@
 import { getPrice, getValueAndCurrency } from "../../helpers/helpers";
 import css from "./BillingPlanDescription.module.scss";
+import { BillingPlanDescriptionProps } from "../../types";
 
 function BillingPlanDescription({
   numberValue,
-  description,
+  price,
   regularityObj,
   additionalMessage = true,
   option,
-}) {
-  const data = description[regularityObj.value];
+}: BillingPlanDescriptionProps) {
+  const data = price[regularityObj.value];
 
   return (
     <>
       {numberValue
-        ? getPrice(numberValue, description[regularityObj.value].currency)
-        : getPrice(...getValueAndCurrency(description, regularityObj), option)}
+        ? getPrice(numberValue, price[regularityObj.value].currency)
+        : getPrice(...getValueAndCurrency(price, regularityObj), option)}
       <abbr title="per">/</abbr>
       <abbr title={`${data.period}`}>{data.periodShort}</abbr>
       {data.additionalInfo && additionalMessage && (

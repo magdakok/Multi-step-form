@@ -1,6 +1,7 @@
 import React from "react";
 import { getPrice, getValueAndCurrency } from "../../helpers/helpers";
 import css from "./BaseCheckboxGroup.module.scss";
+import { BaseCheckboxGroupProps } from "../../types";
 
 function BaseCheckboxGroup({
   legend,
@@ -9,12 +10,12 @@ function BaseCheckboxGroup({
   regularityObj,
   checked,
   handleCheckboxClick,
-}) {
+}: BaseCheckboxGroupProps) {
   return (
     <div>
       <fieldset className={css.fieldset}>
         <legend className={css.legend}>{legend}</legend>
-        {checkboxes.map((checkbox, i) => {
+        {checkboxes.map((checkbox, i: number) => {
           const value = i.toString();
           return (
             <React.Fragment key={checkbox.id}>

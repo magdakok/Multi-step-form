@@ -1,18 +1,19 @@
-import React from "react";
-
 import {
   stepControllersProps,
   firstStepForm,
   billingPlanRadios,
   radioToggle,
   addOnsCheckboxes,
-} from "../../data";
+  //@ts-ignore
+} from "../../data.js";
 
 import StepWrapper from "../StepWrapper/StepWrapper";
 import BaseInput from "../BaseInput/BaseInput";
 import BaseRadio from "../BaseRadio/BaseRadio";
 import BaseCheckboxGroup from "../BaseCheckboxGroup/BaseCheckboxGroup";
 import OrderSummary from "../OrderSummary/OrderSummary";
+
+import { UniqueStepsProps, BaseInputProps } from "../../types"
 
 function UniqueSteps({
   register,
@@ -28,7 +29,7 @@ function UniqueSteps({
   addOns,
   currentStep,
   isMobile,
-}) {
+}: UniqueStepsProps) {
   return (
     <>
       {currentStep === 1 && (
@@ -38,7 +39,7 @@ function UniqueSteps({
           stepControllersProps={stepControllersProps[1]}
           isMobile={isMobile}
         >
-          {firstStepForm.map((input, i) => (
+          {firstStepForm.map((input: BaseInputProps, i: number) => (
             <BaseInput
               index={i}
               label={input.label}
@@ -109,7 +110,7 @@ function UniqueSteps({
             regularityObj={regularityObj}
             planLabel={billingPlanRadios.radios[Number(billingPlan)].label}
             planDetails={
-              billingPlanRadios.radios[Number(billingPlan)].description
+              billingPlanRadios.radios[Number(billingPlan)].price
             }
             addOnsState={addOns}
             addOnsDetails={addOnsCheckboxes.checkboxes}

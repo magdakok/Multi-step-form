@@ -1,11 +1,13 @@
-import React, { useContext, memo } from "react";
+import React, { useContext, memo, PropsWithChildren } from "react";
 import css from "./Indicator.module.scss";
 import { StepChangeContext } from "../App/App";
+//@ts-ignore
 import { steps } from "../../data";
+import { IndicatorProps, IndicatorWrapperProps, IndicatorVisualProps, IndicatorLabelProps, Step } from "../../types";
 
 const LAST_INTERACTIVE_STEP = 4;
 
-function Indicator({ currentStep }) {
+function Indicator({ currentStep }: IndicatorProps) {
   const handleStepChange = useContext(StepChangeContext);
   const hasActiveIndicators = currentStep <= LAST_INTERACTIVE_STEP; // when the final step is achieved all indicators become inactive
 
@@ -14,7 +16,7 @@ function Indicator({ currentStep }) {
       {
         // eslint-disable-next-line
         <ol className={css.list} role="list">
-          {steps.map((step) => {
+          {steps.map((step: Step) => {
             const index = step.index;
             const label = step.label;
             const isCurrent = hasActiveIndicators && index === currentStep;
@@ -28,7 +30,7 @@ function Indicator({ currentStep }) {
                   {isInteractive ? (
                     <button
                       className={css.button}
-                      onClick={() => handleStepChange(null, index)}
+                      onClick={() => handleStepChange && handleStepChange(null, index)}
                     >
                       <IndicatorVisual value={index} />
                       <IndicatorLabel
@@ -57,8 +59,7 @@ function Indicator({ currentStep }) {
   );
 }
 
-function IndicatorWrapper({ state, children }) {
-  // state accepts: current | next | past
+function IndicatorWrapper({ state, children }: PropsWithChildren<IndicatorWrapperProps>) {
   return (
     // eslint-disable-next-line
     <li className={css[state]} role="listitem">
@@ -67,7 +68,7 @@ function IndicatorWrapper({ state, children }) {
   );
 }
 
-function IndicatorVisual({ value }) {
+function IndicatorVisual({ value }: IndicatorVisualProps) {
   return (
     <span className={css.numberBox} role="presentation">
       <span className={css.number}>{value}</span>
@@ -75,7 +76,7 @@ function IndicatorVisual({ value }) {
   );
 }
 
-function IndicatorLabel({ step, label, hiddenLabel }) {
+function IndicatorLabel({ step, label, hiddenLabel }: IndicatorLabelProps) {
   return (
     <>
       {hiddenLabel && <span className="visuallyhidden">{hiddenLabel}</span>}
