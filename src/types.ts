@@ -1,16 +1,16 @@
 import { UseFormRegister, FieldValues, FieldErrors } from "react-hook-form";
 
 // Props
-export type BaseCheckboxGroupProps = {
+export interface BaseCheckboxGroupProps {
   legend: string;
   name: string;
   checkboxes: CheckboxContent[];
   regularityObj: RegularityObj;
   checked: AddOnsState;
   handleCheckboxClick: (option: string) => void;
-};
+}
 
-export type BaseInputProps = {
+export interface BaseInputProps {
   index: number;
   label: string;
   name: string;
@@ -21,9 +21,9 @@ export type BaseInputProps = {
   value: string;
   handleMultipleInputs: (value: string, index: number) => void;
   [key: string]: any;
-};
+}
 
-export type BaseRadioProps = {
+export interface BaseRadioProps {
   legend: string;
   name: string;
   radios: any[];
@@ -32,56 +32,56 @@ export type BaseRadioProps = {
   customStyle?: "toggle";
   billingPlanDescription?: boolean;
   handleRadioClick: (a: number) => void;
-};
+}
 
-export type BillingPlanDescriptionProps = {
+export interface BillingPlanDescriptionProps {
   numberValue?: number;
   price: any;
   regularityObj: RegularityObj;
   additionalMessage?: boolean;
   option?: any;
-};
+}
 
-export type IndicatorProps = {
+export interface IndicatorProps {
   currentStep: number;
-};
+}
 
-export type IndicatorWrapperProps = {
+export interface IndicatorWrapperProps {
   state: "current" | "next" | "past";
-};
+}
 
-export type IndicatorVisualProps = {
+export interface IndicatorVisualProps {
   value: number;
-};
+}
 
-export type IndicatorLabelProps = {
+export interface IndicatorLabelProps {
   step: number;
   label: string;
   hiddenLabel: string | false;
-};
+}
 
-export type OrderSummaryProps = {
+export interface OrderSummaryProps {
   regularityObj: RegularityObj;
   planLabel: string;
   planDetails: NumRadioCheckboxDescRegularity;
   addOnsState: AddOnsState;
   addOnsDetails: CheckboxContent[];
-};
+}
 
-export type StepControllersProps = {
+export interface StepControllersProps {
   [key: string | number]: StepControllerProp;
-};
+}
 
-export type StepWrapperProps = {
+export interface StepWrapperProps {
   heading: string;
   description: string;
   stepControllersProps: StepControllerProp;
   formWrapper?: boolean;
   finalImage?: boolean;
   isMobile: boolean;
-};
+}
 
-export type UniqueStepsProps = {
+export interface UniqueStepsProps {
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors<FieldValues>;
   firstStepFormData: string[];
@@ -95,7 +95,7 @@ export type UniqueStepsProps = {
   addOns: AddOnsState;
   currentStep: number;
   isMobile: boolean;
-};
+}
 
 export type HandleStepChangeType = (
   a: number | null,
@@ -107,26 +107,26 @@ export interface CheckboxContent extends BaseInputProps {
   price: NumRadioCheckboxDescRegularity;
 }
 
-export type RegularityObj = {
+export interface RegularityObj {
   id: string;
   value: "yearly" | "monthly";
   label: string;
   period: string;
-};
+}
 
-export type StepControllerProp = {
+export interface StepControllerProp {
   buttonLabel?: string;
   allowGoStepBack?: boolean;
   navigationButtons?: boolean;
-};
+}
 
-export type NumRadioCheckboxDesc = {
+export interface NumRadioCheckboxDesc {
   value: number;
   currency: string;
   period: string;
   periodShort: string;
   additionalInfo?: string;
-};
+}
 
 export interface NumRadioCheckboxDescRegularity {
   yearly: NumRadioCheckboxDesc;
@@ -137,17 +137,17 @@ export interface NumRadio extends BaseInputProps {
   price: NumRadioCheckboxDesc;
 }
 
-export type AddOnsState = {
+export interface AddOnsState {
   [key: string]: boolean;
-};
+}
 
-export type RegularityRadio = {
+export interface RegularityRadio {
   name: string;
   legend: string;
   radios: RegularityObj[];
-};
+}
 
-export type Step = {
+export interface Step {
   index: number;
   label: string;
-};
+}
