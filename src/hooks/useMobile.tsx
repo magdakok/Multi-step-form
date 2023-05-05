@@ -12,7 +12,7 @@ export function useMobile() {
     });
 
     return () => {
-      mql.removeEventListener("change", setIsMobile(mql.matches));
+      mql.removeEventListener("change", () => setIsMobile(mql.matches));
     };
   }, []);
 

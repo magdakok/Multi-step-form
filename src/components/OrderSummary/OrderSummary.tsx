@@ -2,6 +2,7 @@ import { useContext } from "react";
 import BillingPlanDescription from "../BillingPlanDescription/BillingPlanDescription";
 import { StepChangeContext } from "../App/App";
 import css from "./OrderSummary.module.scss";
+import { OrderSummaryProps } from "../../types";
 
 function OrderSummary({
   regularityObj,
@@ -9,16 +10,19 @@ function OrderSummary({
   planDetails,
   addOnsState,
   addOnsDetails,
-}) {
+}: OrderSummaryProps) {
   const handleStepChange = useContext(StepChangeContext);
 
   const addons = [];
-  let totalPrice = planDetails[regularityObj.value].value;
+  let totalPrice: number = planDetails[regularityObj.value].value;
   for (const key in addOnsState) {
-    if (addOnsState[key]) {
-      addons.push(addOnsDetails[key]);
+    const numericKey = parseInt(key);
+    if (addOnsState[numericKey]) {
+      addons.push(addOnsDetails[numericKey]);
+      const regularity = regularityObj.value;
+      const priceForPickedPeriod = addOnsDetails[numericKey].price[regularity].value;
       totalPrice =
-        totalPrice + addOnsDetails[key].price[regularityObj.value].value;
+        totalPrice + priceForPickedPeriod;
     }
   }
 
@@ -33,14 +37,14 @@ function OrderSummary({
             <button
               type="button"
               className={css.planChange}
-              onClick={() => handleStepChange(null, 2)}
+              onClick={() => handleStepChange && handleStepChange(null, 2)}
             >
               Change
             </button>
           </span>
           <span className={css.planPrice}>
             <BillingPlanDescription
-              description={planDetails}
+              price={planDetails}
               regularityObj={regularityObj}
               additionalMessage={false}
             />
@@ -56,7 +60,7 @@ function OrderSummary({
                 <span className={css.addonsLabel}>{addon.label}</span>
                 <span className={css.addonsPrice}>
                   <BillingPlanDescription
-                    description={addon.price}
+                    price={addon.price}
                     regularityObj={regularityObj}
                     additionalMessage={false}
                     option={{ signDisplay: "always" }}
@@ -74,7 +78,7 @@ function OrderSummary({
         <span className={css.totalPrice}>
           <BillingPlanDescription
             numberValue={totalPrice}
-            description={planDetails}
+            price={planDetails}
             regularityObj={regularityObj}
             additionalMessage={false}
           />

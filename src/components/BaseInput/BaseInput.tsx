@@ -1,6 +1,7 @@
 import React, { useId } from "react";
 import { ErrorMessage } from "@hookform/error-message";
 import css from "./BaseInput.module.scss";
+import { BaseInputProps } from "../../types";
 import "what-input";
 
 function BaseInput({
@@ -14,7 +15,7 @@ function BaseInput({
   value,
   handleMultipleInputs,
   ...delegated
-}) {
+}: BaseInputProps) {
   const id = useId();
   const errorId = `${id}-error`;
 
@@ -39,10 +40,12 @@ function BaseInput({
       <input
         className={errorMessages ? css.inputWithError : css.input}
         {...delegated}
-        {...register(name, {
-          ...rules,
-          onChange: (event) => handleMultipleInputs(event.target.value, index),
-        })}
+        {...register && {
+          ...register(name, {
+            ...rules,
+            onChange: (event: React.FormEvent<HTMLInputElement>) => handleMultipleInputs((event.target as HTMLTextAreaElement).value, index),
+          })
+        }}
         id={id}
         aria-describedby={errorId}
         value={value}

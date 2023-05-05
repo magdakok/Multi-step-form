@@ -91,7 +91,7 @@ export const billingPlanRadios = {
       id: "arcade",
       value: "arcade",
       label: "Arcade",
-      description: {
+      price: {
         monthly: {
           value: 9,
           currency: "USD",
@@ -114,7 +114,7 @@ export const billingPlanRadios = {
       id: "advanced",
       value: "advanced",
       label: "Advanced",
-      description: {
+      price: {
         monthly: {
           value: 12,
           currency: "USD",
@@ -136,7 +136,7 @@ export const billingPlanRadios = {
       id: "pro",
       value: "pro",
       label: "Pro",
-      description: {
+      price: {
         monthly: {
           value: 15,
           currency: "USD",

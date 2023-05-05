@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import { createContext } from "react";
 
 // Styles
 import "../../styles/reset.scss";
@@ -6,6 +6,7 @@ import "../../styles/utilities.scss";
 import "../../styles/global.scss";
 import css from "./App.module.scss";
 
+//@ts-ignore
 import { stepControllersProps } from "../../data";
 
 //Components
@@ -18,8 +19,11 @@ import { useCurrentStep } from "./useCurrentStep";
 import { useFormData } from "./useFormData";
 import { useMobile } from "../../hooks/useMobile";
 
+//Types
+import { HandleStepChangeType } from "../../types";
+
 // Context
-export const StepChangeContext = createContext();
+export const StepChangeContext = createContext<HandleStepChangeType | null>(null);
 
 function App() {
   const { currentStep, isCurrentStep, handleStepChange } = useCurrentStep();
@@ -68,7 +72,8 @@ function App() {
           />
           {bottomMobileNav && (
             <div className={css.controllersMobileWrapper}>
-              <StepControllers {...stepControllersProps[currentStep]} />
+              {currentStep}
+              <StepControllers {...stepControllersProps[(currentStep)]} />
             </div>
           )}
         </WrapperTag>

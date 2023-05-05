@@ -1,6 +1,7 @@
 import React from "react";
 import BillingPlanDescription from "../BillingPlanDescription/BillingPlanDescription";
 import css from "./BaseRadio.module.scss";
+import { BaseRadioProps } from "../../types";
 
 function BaseRadio({
   legend,
@@ -11,7 +12,7 @@ function BaseRadio({
   customStyle,
   billingPlanDescription,
   handleRadioClick,
-}) {
+}: BaseRadioProps) {
   const radioStyle = customStyle === "toggle" ? "toggle" : "radio";
 
   return (
@@ -50,10 +51,10 @@ function BaseRadio({
                   <p className={css[`${radioStyle + "Label"}`]}>
                     {radio.label}
                   </p>
-                  {billingPlanDescription && (
+                  {billingPlanDescription && regularityObj && (
                     <span className={css[`${radioStyle + "Description"}`]}>
                       <BillingPlanDescription
-                        description={radio.description}
+                        price={radio.price}
                         regularityObj={regularityObj}
                       />
                     </span>
