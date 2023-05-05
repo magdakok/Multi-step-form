@@ -26,8 +26,8 @@ a {
 }
 
 html {
-  background-color: var(--color-bg-light);
   height: 100%;
+  background-color: var(--color-bg-light);
 }
 
 body {
@@ -37,4 +37,5 @@ body {
 #root {
   display: grid;
   min-height: 100vh;
+  min-height: 100dvh;
 }

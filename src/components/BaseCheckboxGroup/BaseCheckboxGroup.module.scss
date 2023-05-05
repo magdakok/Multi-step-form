@@ -13,15 +13,15 @@
   &:active,
   &:focus,
   &:focus-visible {
-    outline: 0;
     border: 1px solid var(--color-accent-one);
+    outline: 0;
   }
 }
 
 .fieldset {
-  border: 0;
   margin: 0;
   padding: 0;
+  border: 0;
 }
 
 .legend {
@@ -37,37 +37,37 @@
 }
 
 .checkbox {
-  padding: rem(16) rem(24);
   display: grid;
-  grid-template-areas: "tick text price";
   grid-template-columns: auto 1fr auto;
-  margin-bottom: rem(16);
+  grid-template-areas: "tick text price";
   gap: rem(24);
   align-items: center;
+  margin-bottom: rem(16);
+  padding: rem(16) rem(24);
 }
 
 .checkboxSelected {
   composes: checkbox;
-  border: 1px solid var(--color-accent-one);
   background-color: var(--color-secondary-lightest);
+  border: 1px solid var(--color-accent-one);
 }
 
 .tick {
   grid-area: tick;
-  width: rem(20);
   height: rem(20);
-  border: 1px solid var(--color-bg-border);
+  width: rem(20);
   background-color: var(--color-white);
+  border: 1px solid var(--color-bg-border);
   border-radius: rem(4);
 }
 
 .checkboxSelected .tick {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
-  border: 1px solid var(--color-secondary-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--color-secondary-bg);
+  border: 1px solid var(--color-secondary-bg);
 
   &::after {
     content: url('data:image/svg+xml,%0A%3Csvg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="white" viewBox="0 0 24 24"%3E%3Cpath d="M9 22l-10-10.598 2.798-2.859 7.149 7.473 13.144-14.016 2.909 2.806z"/%3E%3C/svg%3E');
@@ -76,13 +76,13 @@
 
 .label {
   grid-area: text;
-  font-size: rem(16);
   color: var(--color-primary);
+  font-size: rem(16);
 }
 
 .description {
-  font-size: rem(15);
   color: var(--color-grey);
+  font-size: rem(15);
 }
 
 .price {

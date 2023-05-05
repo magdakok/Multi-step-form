@@ -11,8 +11,8 @@
 
   @include min-width(medium) {
     padding: rem(40) rem(32);
-    border-radius: var(--spacer-16);
     background-image: url("/images/bg-sidebar-desktop.svg");
+    border-radius: var(--spacer-16);
   }
 }
 
@@ -29,15 +29,15 @@
 .listItem {
   text-transform: uppercase;
 
-  &:not(:last-child) {
-    margin-right: rem(30);
-  }
-
   @include min-width(medium) {
     &:not(:last-child) {
-      margin-bottom: rem(30);
       margin-right: 0;
+      margin-bottom: rem(30);
     }
+  }
+
+  &:not(:last-child) {
+    margin-right: rem(30);
   }
 }
 
@@ -52,6 +52,7 @@
     grid-template-columns: auto 1fr;
     grid-template-rows: auto auto;
     grid-template-areas: "number step" "number title";
+
     column-gap: rem(16);
   }
 }
@@ -63,29 +64,29 @@
 }
 
 .numberBox {
-  grid-area: number;
   display: grid;
   justify-content: center;
   align-content: center;
   align-self: center;
-  font-size: rem(14);
-  color: var(--color-white);
-  width: rem(33);
+  grid-area: number;
   height: rem(33);
+  width: rem(33);
   border: 1px solid var(--color-white);
   border-radius: 100px;
+  color: var(--color-white);
+  font-size: rem(14);
 
   .current & {
-    color: var(--color-primary);
     background-color: var(--color-accent-light);
     border: 1px solid var(--color-accent-light);
+    color: var(--color-primary);
   }
 
   .past & {
-    opacity: 0.6;
-    color: var(--color-primary);
     background-color: var(--color-accent-light);
     border: 1px solid var(--color-accent-light);
+    opacity: 0.6;
+    color: var(--color-primary);
   }
 }
 
@@ -106,11 +107,11 @@
 
 .label {
   @include visuallyhidden();
-  letter-spacing: 1px;
   grid-area: title;
   color: var(--color-white);
   font-size: rem(14);
   font-weight: var(--font-weight-bold);
+  letter-spacing: 1px;
 
   @include min-width(medium) {
     @include visuallyhidden-reset();
@@ -118,13 +119,13 @@
 }
 
 .button {
-  background-color: transparent;
-  padding: 0;
   margin: 0;
-  font-family: inherit;
-  color: inherit;
-  text-transform: inherit;
+  padding: 0;
+  background-color: transparent;
   border: 0;
+  color: inherit;
+  font-family: inherit;
   text-align: left;
+  text-transform: inherit;
   cursor: pointer;
 }

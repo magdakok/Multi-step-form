@@ -3,26 +3,25 @@
 @import "../../styles/mixins.scss";
 
 .app {
-  --indicator-bottom-overlap: #{rem(68)};
-
   position: relative;
   height: auto;
   font-family: var(--font);
 
   @include min-width(medium) {
-    place-self: center;
-    width: min(rem(940), 90%);
-    min-height: rem(600);
-    border-radius: var(--spacer-16);
-    padding: var(--spacer-16);
     display: grid;
     grid-template-columns: 1fr 2fr;
+    place-self: center;
+    padding: var(--spacer-16);
+    width: min(rem(940), 90%);
+    min-height: rem(600);
     background-color: var(--color-white);
+    border-radius: var(--spacer-16);
   }
-
   @include min-width(large) {
     grid-template-columns: 3fr 7fr;
   }
+
+  --indicator-bottom-overlap: #{rem(68)};
 }
 
 .stepsWrapper {
@@ -37,11 +36,11 @@
 
 .controllersMobileWrapper {
   position: absolute; // [overlapping elements]-> negatative margin affects it
-  display: block;
-  background-color: var(--color-white);
-  padding: rem(16);
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
   z-index: 100;
+  display: block;
+  padding: rem(16);
+  background-color: var(--color-white);
 }

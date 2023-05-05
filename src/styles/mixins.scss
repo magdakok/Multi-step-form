@@ -24,7 +24,7 @@
       @content;
     }
   } @else {
-    @error "UNKNOWN MEDIA BREAKPOINT #{$breakpoint}";
+    @error 'UNKNOWN MEDIA BREAKPOINT #{$breakpoint}';
   }
 }
 
@@ -33,26 +33,26 @@
   $color: var(--color-accent-three),
   $offset: rem(4)
 ) {
-  outline-offset: $offset;
   outline: $width dashed $color;
+  outline-offset: $offset;
 }
 
 @mixin visuallyhidden() {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
   white-space: nowrap;
-  width: 1px;
 }
 
 @mixin visuallyhidden-reset() {
+  position: unset;
+  height: unset;
+  width: unset;
+  overflow: unset;
   clip: unset;
   clip-path: unset;
-  height: unset;
-  overflow: unset;
-  position: unset;
   white-space: unset;
-  width: unset;
 }

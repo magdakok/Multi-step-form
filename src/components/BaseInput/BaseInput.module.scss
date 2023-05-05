@@ -9,9 +9,9 @@
 .label,
 .error {
   display: block;
+  margin-bottom: rem(8);
   font-size: rem(14);
   line-height: calc(16 / 14);
-  margin-bottom: rem(8);
 }
 
 .label {
@@ -19,20 +19,20 @@
 }
 
 .input {
-  font-weight: var(--font-weight-medium);
   display: block;
+  margin-bottom: rem(8);
+  padding: rem(12) rem(16);
   width: 100%;
   border: 1px solid var(--color-bg-border);
-  padding: rem(12) rem(16);
+  border-radius: rem(8);
   color: var(--color-primary);
   font-size: rem(16);
+  font-weight: var(--font-weight-medium);
   line-height: calc(25 / 16);
-  border-radius: rem(8);
-  margin-bottom: rem(8);
 
   &:focus {
-    outline: none;
     border: 1px solid var(--color-accent-one) !important;
+    outline: none;
   }
 
   ::placeholder {
@@ -50,7 +50,7 @@
 }
 
 .errorMessage {
-  text-align: left;
   color: var(--color-error);
   font-weight: var(--font-weight-bold);
+  text-align: left;
 }

@@ -5,31 +5,30 @@
 .step {
   display: grid;
   grid-template-rows: auto 1fr;
-  background-color: var(--color-white);
-  padding: rem(32) rem(24);
   margin: rem(-73) 4.5% rem(16); // [overlapping elements]-> negative top margin
+  padding: rem(32) rem(24);
+  background-color: var(--color-white);
   border-radius: rem(8);
 
   @include min-width(medium) {
-    padding: 0;
     margin: rem(40) 10% rem(16);
-    border-radius: 0;
+    padding: 0;
     background-color: transparent;
+    border-radius: 0;
+  }
+  @include min-width(large) {
+    margin: rem(40) 10% rem(16) rem(100);
   }
 
   .c-app--bottom-nav & {
     margin: rem(-73) 4.5% rem(93); // [overlapping elements]-> negative top margin needs to be compensated for mobile nav with absolutely positioned nav
   }
-
-  @include min-width(large) {
-    margin: rem(40) 10% rem(16) rem(100);
-  }
 }
 
 .stepFinal {
   composes: step;
-  text-align: center;
   align-self: center;
+  text-align: center;
 }
 
 .image {
@@ -38,18 +37,18 @@
 }
 
 .heading {
+  margin-bottom: rem(12);
   color: var(--color-primary);
   font-size: rem(32);
-  line-height: calc(37 / 32);
   font-weight: var(--font-weight-bold);
-  margin-bottom: rem(12);
+  line-height: calc(37 / 32);
 }
 
 .description {
+  margin-bottom: rem(32);
   color: var(--color-grey);
   font-size: rem(16);
   line-height: calc(25 / 16);
-  margin-bottom: rem(32);
 }
 
 .stepInside {

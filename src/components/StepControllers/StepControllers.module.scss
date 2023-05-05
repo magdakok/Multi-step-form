@@ -11,12 +11,12 @@
 }
 
 .button {
-  font-size: rem(16);
-  line-height: calc(18 / 16);
+  margin: 0;
   padding: 0;
   border: 0;
-  margin: 0;
+  font-size: rem(16);
   font-weight: var(--font-weight-medium);
+  line-height: calc(18 / 16);
   cursor: pointer;
 }
 
@@ -28,10 +28,10 @@
 
 .btnPrimary {
   composes: button;
-  color: var(--color-white);
+  padding: rem(14) rem(24);
   background-color: var(--color-primary);
   border-radius: rem(8);
-  padding: rem(14) rem(24);
+  color: var(--color-white);
 
   &:hover {
     background-color: var(--color-secondary-button);

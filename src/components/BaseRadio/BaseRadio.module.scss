@@ -8,9 +8,9 @@
 
 .radioRadio {
   display: grid;
-  gap: rem(14);
-  grid-template-areas: "icon text";
   grid-template-columns: auto 1fr;
+  grid-template-areas: "icon text";
+  gap: rem(14);
   padding: rem(20) rem(16);
 
   @include min-width(medium) {
@@ -28,19 +28,19 @@
   &:active,
   &:focus,
   &:focus-visible {
-    outline: 0;
     border: 1px solid var(--color-accent-one);
+    outline: 0;
   }
 }
 
 .radioFieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
   display: grid;
   grid-template-columns: 1;
   gap: rem(12);
+  margin: 0;
   margin-bottom: rem(14);
+  padding: 0;
+  border: 0;
 
   @include min-width(medium) {
     display: grid;
@@ -52,8 +52,8 @@
 
 .radioRadioSelected {
   composes: radioRadio;
-  border: 1px solid var(--color-accent-one);
   background-color: var(--color-secondary-lightest);
+  border: 1px solid var(--color-accent-one);
 }
 
 .radioLegend {
@@ -61,8 +61,8 @@
 }
 
 .radioIcon {
-  grid-area: icon;
   display: block;
+  grid-area: icon;
 
   @include min-width(medium) {
     margin-bottom: rem(39);
@@ -83,24 +83,24 @@
 
 .radioLabel {
   display: block;
-  font-size: rem(16);
   color: var(--color-primary);
+  font-size: rem(16);
   font-weight: var(--font-weight-medium);
 }
 
 .radioDescription {
   display: block;
-  font-size: rem(14);
   color: var(--color-grey);
+  font-size: rem(14);
 }
 
 // Toggle
 .toggleGroup {
-  border-radius: rem(8);
-  background-color: var(--color-secondary-lightest);
-  padding: rem(13);
-  margin-bottom: rem(24);
   display: flex;
+  margin-bottom: rem(24);
+  padding: rem(13);
+  background-color: var(--color-secondary-lightest);
+  border-radius: rem(8);
 }
 
 .toggleLegend {
@@ -119,9 +119,9 @@
   z-index: 2;
   display: inline-block;
   margin: 0;
+  color: var(--color-grey);
   font-size: rem(18);
   cursor: pointer;
-  color: var(--color-grey);
 }
 
 .toggleRadioSelected {
