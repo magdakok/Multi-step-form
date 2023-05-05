@@ -68,15 +68,44 @@ export type OrderSummaryProps = {
   addOnsDetails: CheckboxContent[];
 };
 
-export interface CheckboxContent extends BaseInputProps {
+export type StepControllersProps = {
+  [key: string | number]: StepControllerProp;
+};
+
+export type StepWrapperProps = {
+  heading: string;
   description: string;
-  price: NumRadioCheckboxDescRegularity;
-}
+  stepControllersProps: StepControllerProp;
+  formWrapper?: boolean;
+  finalImage?: boolean;
+  isMobile: boolean;
+};
+
+export type UniqueStepsProps = {
+  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors<FieldValues>;
+  firstStepFormData: string[];
+  billingPlan: number;
+  regularityObj: RegularityObj;
+  handleMultipleInputs: (value: string, index: number) => void;
+  handleSetBillingPlan: (value: number) => void;
+  handleRegularity: (value: number) => void;
+  regularity: number;
+  handleAddOns: (option: string) => void;
+  addOns: AddOnsState;
+  currentStep: number;
+  isMobile: boolean;
+};
 
 export type HandleStepChangeType = (
   a: number | null,
   b?: null | number
 ) => void;
+
+export interface CheckboxContent extends BaseInputProps {
+  description: string;
+  price: NumRadioCheckboxDescRegularity;
+}
 
 export type RegularityObj = {
   id: string;
@@ -89,19 +118,6 @@ export type StepControllerProp = {
   buttonLabel?: string;
   allowGoStepBack?: boolean;
   navigationButtons?: boolean;
-};
-
-export type StepControllersProps = {
-  [key: string | number]: StepControllerProp;
-};
-
-export type StepWrapperProps = {
-  heading: string;
-  description: string;
-  stepControllersProps: StepControllerProp;
-  formWrapper?: boolean;
-  finalImage?: boolean;
-  isMobile: boolean;
 };
 
 export type NumRadioCheckboxDesc = {
@@ -123,22 +139,6 @@ export interface NumRadio extends BaseInputProps {
 
 export type AddOnsState = {
   [key: string]: boolean;
-};
-
-export type UniqueStepsProps = {
-  register: UseFormRegister<FieldValues>;
-  errors: FieldErrors<FieldValues>;
-  firstStepFormData: string[];
-  billingPlan: number;
-  regularityObj: RegularityObj;
-  handleMultipleInputs: (value: string, index: number) => void;
-  handleSetBillingPlan: (value: number) => void;
-  handleRegularity: (value: number) => void;
-  regularity: number;
-  handleAddOns: (option: string) => void;
-  addOns: AddOnsState;
-  currentStep: number;
-  isMobile: boolean;
 };
 
 export type RegularityRadio = {

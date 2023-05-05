@@ -13,8 +13,7 @@ import BaseRadio from "../BaseRadio/BaseRadio";
 import BaseCheckboxGroup from "../BaseCheckboxGroup/BaseCheckboxGroup";
 import OrderSummary from "../OrderSummary/OrderSummary";
 
-import { UniqueStepsProps } from "../../types"
-import { BaseInputProps } from "../../types"
+import { UniqueStepsProps, BaseInputProps } from "../../types"
 
 function UniqueSteps({
   register,
