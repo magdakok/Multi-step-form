@@ -9,6 +9,7 @@
   padding: rem(32) rem(24);
   margin: rem(-73) 4.5% rem(16); // [overlapping elements]-> negative top margin
   border-radius: rem(8);
+
   @include min-width(medium) {
     padding: 0;
     margin: rem(40) 10% rem(16);
@@ -18,6 +19,10 @@
 
   .c-app--bottom-nav & {
     margin: rem(-73) 4.5% rem(93); // [overlapping elements]-> negative top margin needs to be compensated for mobile nav with absolutely positioned nav
+  }
+
+  @include min-width(large) {
+    margin: rem(40) 10% rem(16) rem(100);
   }
 }
 

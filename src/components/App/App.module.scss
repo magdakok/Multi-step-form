@@ -19,6 +19,10 @@
     grid-template-columns: 1fr 2fr;
     background-color: var(--color-white);
   }
+
+  @include min-width(large) {
+    grid-template-columns: 3fr 7fr;
+  }
 }
 
 .stepsWrapper {

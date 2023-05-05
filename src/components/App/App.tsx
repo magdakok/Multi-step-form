@@ -72,7 +72,6 @@ function App() {
           />
           {bottomMobileNav && (
             <div className={css.controllersMobileWrapper}>
-              {currentStep}
               <StepControllers {...stepControllersProps[(currentStep)]} />
             </div>
           )}
