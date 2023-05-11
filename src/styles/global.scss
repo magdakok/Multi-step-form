@@ -31,11 +31,9 @@ html {
 }
 
 body {
-  min-height: 100%;
+  display: grid;
 }
 
 #root {
   display: grid;
-  min-height: 100vh;
-  min-height: 100dvh;
 }

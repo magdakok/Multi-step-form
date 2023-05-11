@@ -6,6 +6,8 @@ export function getPrice(value: number, currency: string, options?: Intl.NumberF
       navigator.languages[0]) ||
     navigator.language || "en";
 
+
+  // TODO: Try with https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
   return value.toLocaleString(userLocale, {
     style: "currency",
     currency: currency,
